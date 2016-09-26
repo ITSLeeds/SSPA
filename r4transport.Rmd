@@ -1,0 +1,26 @@
+---
+title: "Template for ITS lectures"
+author: "Author name"
+date: "`r Sys.Date()` Week 17. For TRAN5015."
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Context: Sustainable Spatial Planning and Analysis
+
+- From AAARRRRGGGGGH to R Getting your hands dirty with data
+- Practical calculating accessibility measures in R and QGIS and visualising the results
+
+Requirements: students are recommended to have the latest versions of R, RStudio and QGIS installed on their computers.
+
+Learning outcomes: students will learn how to download and visualise spatial data with R
+
+## Datasets
+
+- Reproducible approach will be used, starting from the data
+- OpenStreetMap data on roads
+- Census OD data on movement patterns
+
