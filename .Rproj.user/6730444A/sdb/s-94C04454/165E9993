@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"About This Website\"\n---\n\nMore about this website.\n",
+    "created" : 1474902281147.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1732481516",
+    "id" : "165E9993",
+    "lastKnownWriteTime" : 1474902273,
+    "last_content_update" : 1474902273,
+    "path" : "~/repos/ITSLeeds/TRAN5015/about.Rmd",
+    "project_path" : "about.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

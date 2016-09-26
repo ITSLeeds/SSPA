@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Sustainable spatial planning and analysis (SSPA): course notes\"\n---\n\nThis is a website for content related to the ITS module **TRAN5015**.\n\nThe slides on 'R for Transport' can be found [here](r4transport.html).\n",
+    "created" : 1474893266918.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "545640406",
+    "id" : "4C7799FC",
+    "lastKnownWriteTime" : 1474902273,
+    "last_content_update" : 1474902273,
+    "path" : "~/repos/ITSLeeds/TRAN5015/index.Rmd",
+    "project_path" : "index.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
