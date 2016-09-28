@@ -87,7 +87,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">2016-09-26 Week 17. For TRAN5015.</p>
+            <p style="margin-top: 6px; margin-left: -2px;">2016-09-28 Week 17. For TRAN5015.</p>
           </hgroup>
   </slide>
 
@@ -106,9 +106,19 @@
 
 <ul>
 <li>Reproducible approach will be used, starting from the data</li>
-<li>OpenStreetMap data on roads</li>
-<li>Census OD data on movement patterns</li>
-</ul></article></slide>
+<li>OpenStreetMap data on roads: Dutch Road Network data for Groningen: <a href='http://download.geofabrik.de/europe.html' title=''>http://download.geofabrik.de/europe.html</a></li>
+<li>Census OD data on movement patterns: <a href='http://wicid.ukdataservice.ac.uk/' title=''>http://wicid.ukdataservice.ac.uk/</a></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Illustrative work</h2></hgroup><article  id="illustrative-work">
+
+<pre class = 'prettyprint lang-r'>library(tmap)
+b = bb(&quot;Groningen&quot;)
+r = read_osm(b, type = &quot;opencyclemap&quot;)
+tm_shape(r) +
+  tm_raster(r)</pre>
+
+<p><img src="r4transport_files/figure-html/unnamed-chunk-1-1.png" width="720" /></p></article></slide>
 
 
   <slide class="backdrop"></slide>

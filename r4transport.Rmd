@@ -2,7 +2,9 @@
 title: "Template for ITS lectures"
 author: "Author name"
 date: "`r Sys.Date()` Week 17. For TRAN5015."
-output: ioslides_presentation
+output: 
+  ioslides_presentation: 
+    self_contained: no
 ---
 
 ```{r setup, include=FALSE}
@@ -21,6 +23,17 @@ Learning outcomes: students will learn how to download and visualise spatial dat
 ## Datasets
 
 - Reproducible approach will be used, starting from the data
-- OpenStreetMap data on roads
-- Census OD data on movement patterns
+- OpenStreetMap data on roads: Dutch Road Network data for Groningen: http://download.geofabrik.de/europe.html
+- Census OD data on movement patterns: http://wicid.ukdataservice.ac.uk/
+
+## Illustrative work
+
+```{r, echo=TRUE}
+library(tmap)
+b = bb("Groningen")
+r = read_osm(b, type = "opencyclemap")
+tm_shape(r) +
+  tm_raster(r)
+```
+
 
