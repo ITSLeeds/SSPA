@@ -1,0 +1,13 @@
+Criterion,Component,Score (0:5),Comments,Criterion description
+1,Approach,5,"Was it an approach overall approach, e.g. based on the literature",Calculation and visualisation of one spatial sustainable transport indicator of your choice.  This will contribute to 20% of the overall mark.
+1,Method,5,Was the method based on an understanding of the problem and data?,
+1,Implementation,5,How was it implemented? Extra marks for reproducible code (e.g. in appendix),
+1,Visualisation,5,Does it look good? Does it present policy-relevant information effectively? Bonus: interactivity.,
+2,Skill in selecting input data,10,Was a suitable dataset selected? How? Documented? Alternatives?,
+2,Skill in data cleaning and pre-processing,10,An often overlooked aspect of analysis – were steps taken to get the raw data into a suitable form for analysis? How?,Evidence of technical skills applied to produce the indicator and explanation of indicator construction.   This will contribute 40% of the overall mark
+2,Skill in analysis of the available data,10,How was the analysis undertaken? ,
+2,Skill in modelling,10,"What modelling steps were used? e.g. Regression, cluster analysis.",
+3,Originality,10,Was the method an original contribution,"Discussion of the indicator results, evaluation of the policy relevance of the indicator and its limitations. This will contribute 40% of the overall mark."
+3,Contribution,10,"Is this a valuable contribution to knowledge, in policy or academic terms?",
+3,Discussion of limitations,10,What where the limitations? ,
+3,Future steps,10,How would this be taken forward in the future?,
