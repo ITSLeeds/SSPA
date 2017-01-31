@@ -1,0 +1,22 @@
+# Resources for installing R
+
+Here are some resources for installing R and RStudio:
+
+## R
+
+- Installing R (introductory): http://rprogramming.net/how-to-install-r-fast/
+
+- Installing R: https://csgillespie.github.io/efficientR/set-up.html#installing-r
+
+## RStudio
+
+- Installing RStudio (introductory): http://rprogramming.net/download-and-install-rstudio/
+
+- And RStudio: https://csgillespie.github.io/efficientR/set-up.html#rstudio
+
+## Video
+
+Check out the video here:
+
+https://www.rstudio.com/products/RStudio/
+
