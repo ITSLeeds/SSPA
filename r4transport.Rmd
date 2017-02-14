@@ -1,18 +1,24 @@
 ---
-title: "Template for ITS lectures"
-author: "Author name"
+title: "R for Spatial Planning and Analysis"
+author: "Robin Lovelace"
 date: "`r Sys.Date()` Week 17. For TRAN5015."
-output: ioslides_presentation
+output: 
+  html_document: 
+    number_sections: yes
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Introduction
+
 ## Context: Sustainable Spatial Planning and Analysis
 
 - From AAARRRRGGGGGH to R Getting your hands dirty with data
-- Practical calculating accessibility measures in R and QGIS and visualising the results
+- Reproducing the analysis done for Harrogate data with R ()
+- Practical calculating accessibility measures in R and QGIS and visualising the results (bonus)
 
 Requirements: students are recommended to have the latest versions of R, RStudio and QGIS installed on their computers.
 
@@ -23,4 +29,65 @@ Learning outcomes: students will learn how to download and visualise spatial dat
 - Reproducible approach will be used, starting from the data
 - OpenStreetMap data on roads
 - Census OD data on movement patterns
+
+# From AAARGH to R
+
+# Reproducing what we did with QGIS
+
+## Data access
+
+First, we must ensure that the data used for the QGIS tutorial is in our working directory.
+
+You could just look at the Files tab in the bottom left of your RStudio instance to do this:
+
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/rstudio-data.png")
+```
+
+You can also do the programmatically, but entering the following command:
+
+```{r}
+list.dirs(recursive = FALSE)
+```
+
+What just happened?
+
+We asked R to list all the directories in the working directory. Note that the output is printed to screen, and into this tutorial. The one we're interested in is element number 5:
+
+```
+[5] "./QGISforSSPAdata
+```
+
+This exercise demonstrates the difference between a graphical user interface and doing things programmatically. Both work. But the programming way is more precise, but potentially more confusing if you're new to R.
+
+### Challenge
+
+1. Look inside the QGISforSSPAdata folder. Count how many files and folders are in there manually.
+
+2. Now automate the process using the function `list.files()` - what is the output? Do the numbers match?
+
+Note: this is the output you should get from the previous command:
+
+```{r, echo=FALSE}
+list.files(path = "QGISforSSPAdata/")
+```
+
+## Reading data
+
+We'll use the **sf** package to read the data.
+
+To install the package, use the following command:
+
+```{r, eval=FALSE}
+install.packages("sf")
+```
+
+
+
+This illustrates the differ
+
+# Calculating accessibility measures
+
+
 
