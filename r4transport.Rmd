@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
@@ -31,6 +31,8 @@ Learning outcomes: students will learn how to download and visualise spatial dat
 - Census OD data on movement patterns
 
 # From AAARGH to R
+
+## Setting up a project
 
 # Reproducing what we did with QGIS
 
@@ -83,9 +85,22 @@ To install the package, use the following command:
 install.packages("sf")
 ```
 
+To make the functions available from the package we've just installed, use the `library` function, as follows:
 
+```{r}
+library(sf)
+```
 
-This illustrates the differ
+Now we can use the new powers enabled by this package, like reading in a shapefile:
+
+```{r}
+stns = st_read("QGISforSSPAdata/stations UK/station_point.shp")
+```
+
+```{r}
+plot(stns)
+```
+
 
 # Calculating accessibility measures
 
