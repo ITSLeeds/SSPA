@@ -38,7 +38,7 @@ Learning outcomes: students will learn how to download and visualise spatial dat
 
 ## Data access
 
-First, we must ensure that the data used for the QGIS tutorial is in our working directory.
+First, we must ensure that the data used for the QGIS tutorial is in your working directory.
 
 You could just look at the Files tab in the bottom left of your RStudio instance to do this:
 
@@ -97,10 +97,47 @@ Now we can use the new powers enabled by this package, like reading in a shapefi
 stns = st_read("QGISforSSPAdata/stations UK/station_point.shp")
 ```
 
+Note that the information printed to screen when you read this file in is useful. It tells you the data format (ESRI Shapefile), the number of features (2,525 output areas) and the coordinate reference system (CRS): the `+units=m` part of the output tells you that units of this CRS is meters.
+
+Now that the data has been loaded into an R object, `stns`, we can query and analyse the data.
+To provide a simple example, find out the names of the variables in the object, using the `names()` function as follows:
+
+```{r}
+names(stns)
+```
+
+The result tells us that there are 4 variables stored in the object (one of these, `geometry` is not really a data attribute but a geographical attribute so the data has 3 variables or `fields`).
+
+The data can be plotted as follows:
+
 ```{r}
 plot(stns)
 ```
 
+Note that three versions of the dataset are plotted: one for each variable contained in the `stns` object.
+These can be seen with the following command:
+
+```{r}
+head(stns)
+```
+
+### Challenge: read and plot Harrogate data
+
+1. Find the file Harrogate OAC layer on your computer and load it into an object called `harrogate_oac` using the function `st_read()`.
+
+```{r, echo=FALSE, results='hide'}
+harrogate_oac = st_read("QGISforSSPAdata/Harrogate OAC/Harrogate.shp")
+```
+
+2. Explore the results using the `names()`, `plot()`, and `head()` commands. How many variables does the object `harrogate_aoc` have?
+
+```{r, echo=FALSE}
+names(harrogate_oac)
+```
+
+
+
+## Subsetting data
 
 # Calculating accessibility measures
 
