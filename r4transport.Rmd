@@ -38,7 +38,7 @@ Learning outcomes: students will learn how to download and visualise spatial dat
 
 ## Data access
 
-First, we must ensure that the data used for the QGIS tutorial is in our working directory.
+First, we must ensure that the data used for the QGIS tutorial is in your working directory.
 
 You could just look at the Files tab in the bottom left of your RStudio instance to do this:
 
@@ -97,9 +97,96 @@ Now we can use the new powers enabled by this package, like reading in a shapefi
 stns = st_read("QGISforSSPAdata/stations UK/station_point.shp")
 ```
 
+Note that the information printed to screen when you read this file in is useful. It tells you the data format (ESRI Shapefile), the number of features (2,525 output areas) and the coordinate reference system (CRS): the `+units=m` part of the output tells you that units of this CRS is meters.
+
+Now that the data has been loaded into an R object, `stns`, we can query and analyse the data.
+To provide a simple example, find out the names of the variables in the object, using the `names()` function as follows:
+
+```{r}
+names(stns)
+```
+
+The result tells us that there are 4 variables stored in the object (one of these, `geometry` is not really a data attribute but a geographical attribute so the data has 3 variables or `fields`).
+
+The data can be plotted as follows:
+
 ```{r}
 plot(stns)
 ```
+
+Note that three versions of the dataset are plotted: one for each variable contained in the `stns` object.
+These can be seen with the following command:
+
+```{r}
+head(stns)
+```
+
+### Challenge: read and plot Harrogate data
+
+1. Find the file Harrogate OAC layer on your computer and load it into an object called `harrogate_oac` using the function `st_read()`.
+
+```{r, echo=FALSE, results='hide'}
+harrogate_oac = st_read("QGISforSSPAdata/Harrogate OAC/Harrogate.shp")
+```
+
+2. Explore the results using the `names()`, `plot()`, and `head()` commands. How many variables does the object `harrogate_aoc` have? The results of the first of these commands is shown below. **Note: if you plot the object, make sure you only plot a few of the variables, e.g. those represented by `harrogate[1:3]`.
+
+```{r, echo=FALSE}
+names(harrogate_oac)
+```
+
+3. When we looked at this data before in QGIS, we were interested in the 'Supergroup' variable. From exploring the data above, we can see that `SPRGRP` is variable `[6]`.
+
+If we wanted to plot this, we would used the command:
+
+```{r}
+plot(harrogate_oac[6])
+```
+
+Alternatively, we could call the `SPRGRP` variable directly:
+
+```{r}
+plot(harrogate_oac["SPRGRP"])
+```
+
+
+
+## Subsetting data
+
+This section assumes you have an object called `harrogate_aoc` loaded into your R environment.
+As with the location of files, you can check this in two ways, using either the GUI or the CLI. (Quicktest: what is a GUI? What is a CLI?)
+
+The GUI method involves clicking on the right part of the screen if the Environment pane isn't already visible in the top left of your RStudio console. The CLI method uses the `ls()` (short for list objects) function as follows:
+
+```{r}
+ls()
+```
+
+Now we've establised that the `harrogate_aoc` data is definitely there, we can sub-set it as follows:
+
+```{r}
+h_sel = harrogate_oac[harrogate_oac$SPRGRP == 1,]
+```
+
+Let's see what we've subsetted but plotting the result for the relevant variable:
+
+```{r}
+plot(h_sel["SPRGRP"])
+```
+
+What just happened? The subsetting command used the square brackets (`[]`) to select only the features of interest and then we plotted the result for a single variable.
+
+That may seem complicated and confusing, but it's actually a highly efficient way of subsetting geographical data. Remember the long-winded QGIS way of doing it, for example:
+
+- Open the attribute table of the Harrogate OAC layer1. 
+- Press the select using an expression button 
+- In the following dialog find fields and values group.  Open it and find the SPRGRP field. Double click it. 
+- Then press the “=” button in the operators group. 
+- Then type 1 in the Expression.  It should look like the screen grab below 
+- Then press OK.  Then press Close
+
+It is impressive that R can undertake all of those steps in a single line of code!
+
 
 
 # Calculating accessibility measures
