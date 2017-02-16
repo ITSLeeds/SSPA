@@ -129,15 +129,49 @@ head(stns)
 harrogate_oac = st_read("QGISforSSPAdata/Harrogate OAC/Harrogate.shp")
 ```
 
-2. Explore the results using the `names()`, `plot()`, and `head()` commands. How many variables does the object `harrogate_aoc` have?
+2. Explore the results using the `names()`, `plot()`, and `head()` commands. How many variables does the object `harrogate_aoc` have? The results of the first of these commands is shown below. **Note: if you plot the object, make sure you only plot a few of the variables, e.g. those represented by `harrogate[1:3]`.
 
 ```{r, echo=FALSE}
 names(harrogate_oac)
 ```
 
-
-
 ## Subsetting data
+
+This section assumes you have an object called `harrogate_aoc` loaded into your R environment.
+As with the location of files, you can check this in two ways, using either the GUI or the CLI. (Quicktest: what is a GUI? What is a CLI?)
+
+The GUI method involves clicking on the right part of the screen if the Environment pane isn't already visible in the top left of your RStudio console. The CLI method uses the `ls()` (short for list objects) function as follows:
+
+```{r}
+ls()
+```
+
+Now we've establised that the `harrogate_aoc` data is definitely there, we can sub-set it as follows:
+
+```{r}
+h_sel = harrogate_oac[harrogate_oac$SPRGRP == 1,]
+```
+
+Let's see what we've subsetted but plotting the result for the relevant variable:
+
+```{r}
+plot(h_sel["SPRGRP"])
+```
+
+What just happened? The subsetting command used the square brackets (`[]`) to select only the features of interest and then we plotted the result for a single variable.
+
+That may seem complicated and confusing, but it's actually a highly efficient way of subsetting geographical data. Remeber the long-winded QGIS way of doing it, for example:
+
+- Open the attribute table of the Harrogate OAC layer1. 
+- Press the select using an expression button 
+- In the following dialog find fields and values group.  Open it and find the SPRGRP field. Double click it. 
+- Then press the “=” button in the operators group. 
+- Then type 1 in the Expression.  It should look like the screen grab below 
+- Then press OK.  Then press Close
+
+It is impressive that R can undertake all of those steps in a single line of code!
+
+
 
 # Calculating accessibility measures
 
