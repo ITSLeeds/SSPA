@@ -199,24 +199,25 @@ To recall where we're at, let's re-plot the stations data, with only one variabl
 
 ```{r}
 plot(stns[1])
-plot(harrogate_oac, add = TRUE)
+plot(harrogate_oac[1], add = TRUE)
 ```
 
-Note the little black dot in the corner. That tells us we have a problem: the CRS is different for the two datasets.
+To subset only the stations within Harrogate involves two steps.
 
-To discover the CRSs, use the following commands:
+First, you ensure that both datasets have the same CRS:
 
 ```{r}
-st_crs(harrogate_oac)
-st_crs(stns)
-stns_osgb = st_transform(stns, 4326)
+st_crs(stns) <- st_crs(harrogate_oac)
 ```
 
+Then we can use square brackets, as before, but with another spatial dataset used to subset the relevant objects:
 
 ```{r}
-plot(stns_osgb[1])
-plot(harrogate_oac, add = TRUE)
+stns_harrogate = stns[harrogate_oac,]
+plot(harrogate_oac[1],)
+plot(stns_harrogate[1], add = TRUE, col = "black", pch = 16, cex = 3)
 ```
+
 
 
 # Further resources
@@ -226,3 +227,4 @@ plot(harrogate_oac, add = TRUE)
     - https://cran.r-project.org/web/packages/stplanr/vignettes/introducing-stplanr.html
     - https://cran.r-project.org/web/packages/stplanr/vignettes/stplanr-paper.html
 - Efficient R Programming book: https://csgillespie.github.io/efficientR/
+- [Creating Maps With R](https://github.com/Robinlovelace/Creating-maps-in-R) is a good resource for basic mapping in R, using the **sp** package
