@@ -16,23 +16,40 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Context: Sustainable Spatial Planning and Analysis
 
-- From AAARRRRGGGGGH to R Getting your hands dirty with data
-- Reproducing the analysis done for Harrogate data with R ()
-- Practical calculating accessibility measures in R and QGIS and visualising the results (bonus)
+- Reproducibility requires operations to be encoded in computer code
+- That is why a command line interface (CLI) is so powerful
+- Solutions are more sustainable if they can be reproduced
 
 Requirements: students are recommended to have the latest versions of R, RStudio and QGIS installed on their computers.
 
 Learning outcomes: students will learn how to download and visualise spatial data with R
 
-## Datasets
-
-- Reproducible approach will be used, starting from the data
-- OpenStreetMap data on roads
-- Census OD data on movement patterns
-
-# From AAARGH to R
+We'll build on the datasets used in the previous practical.
 
 ## Setting up a project
+
+Open RStudio and click on the box in the top right hand corner.
+Create a new project and call it something sensible, like `SSPA-R`.
+
+You can also download the contents of the project `SSPA` that these materials were developed in, from:
+
+https://github.com/ITSLeeds/SSPA/archive/master.zip
+
+Get used to RStudio's interface, with reference to the '[RStudio Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)' (Google it if you cannot find it!).
+
+## Getting up to speed with R
+
+Based on Colin Gillespie's Introduction to R, try: 
+
+- Creating and deleting objects
+- Basic plotting
+- Creating and saving R scripts
+
+Before continuing
+
+## R version, installing and updating packages
+
+To check what version of R you're using, type the following command.
 
 # Reproducing what we did with QGIS
 
@@ -146,6 +163,8 @@ The GUI method involves clicking on the right part of the screen if the Environm
 ls()
 ```
 
+### Subsetting based on attribute
+
 Now we've establised that the `harrogate_aoc` data is definitely there, we can sub-set it as follows:
 
 ```{r}
@@ -171,9 +190,39 @@ That may seem complicated and confusing, but it's actually a highly efficient wa
 
 It is impressive that R can undertake all of those steps in a single line of code!
 
+### Subsetting based on location
+
+This section assumes you have the `stns` and `harrogate_oac` objects in your environment.
+If so, let's proceed to subset the stations.
+
+To recall where we're at, let's re-plot the stations data, with only one variable, and overlay the oac data on top:
+
+```{r}
+plot(stns[1])
+plot(harrogate_oac, add = TRUE)
+```
+
+Note the little black dot in the corner. That tells us we have a problem: the CRS is different for the two datasets.
+
+To discover the CRSs, use the following commands:
+
+```{r}
+st_crs(harrogate_oac)
+st_crs(stns)
+stns_osgb = st_transform(stns, 4326)
+```
 
 
-# Calculating accessibility measures
+```{r}
+plot(stns_osgb[1])
+plot(harrogate_oac, add = TRUE)
+```
 
 
+# Further resources
 
+- The RStudio Cheatsheet: https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+- stplanr tutorials:
+    - https://cran.r-project.org/web/packages/stplanr/vignettes/introducing-stplanr.html
+    - https://cran.r-project.org/web/packages/stplanr/vignettes/stplanr-paper.html
+- Efficient R Programming book: https://csgillespie.github.io/efficientR/
