@@ -218,6 +218,14 @@ plot(harrogate_oac[1],)
 plot(stns_harrogate[1], add = TRUE, col = "black", pch = 16, cex = 3)
 ```
 
+There are other ways to get the same result.
+
+```{r}
+sel_over = st_overlaps(stns, harrogate_oac)
+head(sel_over[[1]])
+```
+
+
 
 
 # Further resources
