@@ -3,7 +3,7 @@ title: "R for Accessibility Analysis"
 author: "Robin Lovelace"
 date: "`r Sys.Date()` Week 19. For TRAN5015."
 output: 
-  html_document: 
+  pdf_document: 
     number_sections: yes
     toc: yes
 ---
@@ -303,11 +303,6 @@ lines(zones_joined$dist_to_school, model_cycle$fitted.values)
 
 # Code that may help if you get stuck (not necessarily in order)
 
-## Challenges
-
-1. Type out each line of code and see if you can reproduce the results.
-1. Add comments with the `#` above each line to explain what is going on.
-
 ```{r, eval=FALSE}
 
 sum(school_data$SSCyc15pct < 50)
@@ -326,5 +321,11 @@ summary(zones)
 <!--     LA_Name SSPT30pct SSCyc30pct SSCar30pct -->
 <!--      <fctr>     <dbl>      <dbl>      <dbl> -->
 <!-- 1 Harrogate  69.76923   82.42308        100 -->
+
+## Challenges
+
+1. Type out each line of code and see if you can reproduce the results.
+1. Add comments with the `#` above each line to explain what is going on.
+1. **Advanced challange:** Take a look at this academic paper that is under review and critically assess its method - https://github.com/Robinlovelace/sao-paulo-travel/blob/master/paper.Rmd
 
 
