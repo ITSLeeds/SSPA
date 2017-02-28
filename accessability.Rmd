@@ -24,6 +24,12 @@ library(sp)
 library(sf)
 ```
 
+If you want to use the 'development version' of **sf** (recommended for the `st_bind_cols()` function to work), you can install it with the following command (which needs **devtools** to be installed):
+
+```{r, eval=FALSE}
+devtools::install_github("edzer/sfr")
+```
+
 Another pre-requisite is that the schools data is saved in your working directory.
 Unzip the file `accessibility practical data.zip` into the folder you're working from, and check it has worked.
 If your project is called SSPA, for example, you should the following in the file explorer panel:
@@ -159,6 +165,141 @@ plot(zones_joined["SSCyct"])
 
 The results show, as we may have imagined, that the most accessible places for cycling (with the lowest average cycle times) are located near the city centre.
 
+As an exercise, imagine that your schools data is not in the correct order.
+We can create this 'mixed up' dataset by sampling randomly from the rows:
+
+```{r}
+set.seed(42) # so random numbers repeat, for reproducibility
+new_order = sample(nrow(school_data))
+school_data_mixed = school_data[new_order,]
+```
+
+Now simply joining the data results in incorrect data, as illustrated below.
+
+```{r}
+zones_mixed = st_bind_cols(zones, school_data_mixed)
+plot(zones_mixed["SSCyct"])
+```
+
+The results show no meaningful pattern. They have been 'scrambled'.
+**This is common problem with spatial data - watch out!**
+
+To 'descramble' the data, we can use the `inner_join()` function from the **dplyr** package. Before the data can be joined, we must ensure the 'joining variable' has the same name in both datasets:
+
+```{r}
+library(dplyr)
+names(school_data_mixed)[1] # recall name of LSOA variable
+names(zones)[1]
+school_data_mixed = rename(school_data_mixed, LSOA11C = LSOA_code)
+```
+
+We're going to use the `left_join()` function from **dplyr** because it does keeps the number of rows the same before and after the join:
+
+```{r}
+zones_descrambled = left_join(x = zones, y = school_data_mixed)
+plot(zones_descrambled["SSCyct"])
+```
+
+If you get the same plot as I did, well done: you've just performed an attribute join on a spatial dataset from the command line using cutting edge software for spatail data science. Congratulations!
+
+# Generating your own measure of accessibility
+
+It's great that the UK has accessibility data at such high geographical resolution, but in many situations, you'll have develop your own metrics of accessibility.
+In this section we will therefore see if we can generate our own metric of accessibility, to complement the official stats.
+
+## Downloading and processing data from OSM
+
+Let's download the schools in Harrogate as a starting point.
+I did using code from the in-development **osmdata** package, which I've commented out to reduce time and complexity.
+
+```{r}
+# Code to download schools data - uncomment if you're brave!
+# devtools::install_github("osmdatar/osmdata")
+# library(osmdata)
+# q = add_feature(opq(bbox = "Harrogate"), "amenity", "school")
+# schools_osm = osmdata_sf(q)
+# plot(zones[15])
+# schools_osm_p = schools_osm$osm_points
+# st_write(schools_osm_p, "data/schools.geojson") # save the results
+```
+
+Now we can load-in and plot the data:
+
+```{r}
+schools = st_read("data/schools.geojson")
+plot(zones[15])
+plot(schools, add = T)
+```
+
+But where are the schools? What just happened??
+
+The answer to this question lies in the CRS, which we can double check as follows:
+
+```{r}
+st_crs(zones)
+st_crs(schools)
+```
+
+The output of those commands shows that they are totally different. The solution: transform the pesky schools so they have the same CRS:
+
+```{r}
+schools = st_transform(schools, st_crs(zones))
+plot(zones[15])
+plot(schools, add = T)
+```
+
+Now it works.
+
+The only problem is that there are reported to be dozens of schools dotted all round Harrogate. There cannot be that many!
+
+One way to subset only the points that actually are schools is to remove all those that have no name:
+
+```{r}
+sel_noname = is.na(schools$name)
+schools = schools[!sel_noname,]
+plot(zones[15])
+plot(schools, add = T, cex = 5, pch = 20, col = "red")
+```
+
+How far are those schools from the zones?
+That can be calculated in R too (as with most things):
+
+```{r}
+dist_mat = st_distance(zones, schools)
+dist_min = apply(dist_mat, MARGIN = 1, FUN = min)
+zones_joined$dist_to_school = dist_min
+plot(zones_joined["dist_to_school"])
+plot(schools, add = T, cex = 5, pch = 20, col = "red")
+```
+
+Well done, you've created your first (albeit crude) accessibility indicator.
+How does it compare with the official data?
+Let's take a look:
+
+```{r}
+plot(zones_joined$dist_to_school, zones_joined$SSCyct)
+```
+
+That may not seem like an impressive fit, but `cor()` proves that there is a good positive correlation:
+
+```{r}
+cor(zones_joined$dist_to_school, zones_joined$SSCyct)
+```
+
+The final exercise is to create a model linking distance to school from our OSM data with the time to cycle from official data:
+
+```{r}
+model_cycle = lm(formula = SSCyct ~ dist_to_school, data = zones_joined)
+cy_pred = model_cycle$fitted.values
+plot(zones_joined$dist_to_school, zones_joined$SSCyct)
+lines(zones_joined$dist_to_school, model_cycle$fitted.values)
+```
+
+## Challenges
+
+1. Try to fit more variables to explain the variability in `SSCyct` - which are most powerful?
+1. Take a look at the **osmdata** package on-line. What can you find out about it?
+1. How could OSM data be useful in transport research?
 
 # Code that may help if you get stuck (not necessarily in order)
 
