@@ -37,7 +37,7 @@ school_file = "accessibility practical data/HGTJTSSecondary_School.csv"
 school_data = read.csv(school_file)
 ```
 
-We can explore the data loaded. Use the following commands to see what information we have about school accessibility, in terms of the number of rows, column names and summary statistics for assorted variables:
+We can explore the data loaded using a range of R commands. The following commands to see what information we have about school accessibility, in terms of the number of rows, column names and summary statistics for assorted variables:
 
 ```{r}
 nrow(school_data)
@@ -55,15 +55,102 @@ We can visualise the distribution of average times taken to get to school per zo
 hist(school_data$SSCyct)
 ```
 
+Further, R makes exploring the relationships between variables relatively easy.
+The following command, for example, reports the correlation between the time taken by car and by bike to get to school across the zones in Harrogate:
+
+```{r}
+cor(school_data$SSCart, school_data$SSCyct)
+```
+
+Use the command `?cor` to find out what the output means: that the Pearson cooeficient of determiniation is very close to 1, meaning that there is a strong positive relationship between the time taken to get to school by car and bike.
+This can be plotted with the base `plot()` function:
+
+```{r}
+plot(school_data$SSCart, school_data$SSCyct)
+```
+
+This raises the question: what is the relationship between time to get to school by car and public transport?
+
+Before moving on to try the exercises, try to play with the data. Can you find out any surprising statistics, or interesting visualisations?
+
+## Tip
+
+Use the command `View(school_data)` to see the data in an interactive spreadsheet.
+
 ## Exercises 
 
-1. What does the histogram tell you about the spatial distribution of schools in Harrogate?
+1. What does the histogram plotted above tell you about the spatial distribution of schools in Harrogate?
 1. What's the average time taken to get to school by public transport and car?
 1. What's the average percent of users in Harrogate who can get to school in 30 minutes, by public transport, car and cycling?
 1. What's the average percent of users in Harrogate who **cannot** get to school in 30 minutes, by public transport, car and cycling? (Bonus: what is surprising about this, why, and what explains it?)
 1. How many zones are there in which the majority of children could not cycle to school in 15?
 
+# Loading and exploring the spatial data
+
+From the previous section we should have a good idea about what the data is like. From the excercises and generally playing with the data, it should be clear that there are many more things we could do to explore this dataset. R excels at statistical analysis. It allows you 'shred' datasets or 'make data sing', depending how you like to say it. So time spent learning data processing and visualisation with R is time well spent.
+
+
+Putting the data on a map is a particularly powerful method for understanding it.
+Geographical analysis can help develop locally specific sustainable transport policies. To do that, we need join the data in `school_data` with a spatial dataset we'll read-in from a shapefile.
+
+Read in the data as follows:
+
+```{r}
+zones_file = "accessibility practical data/HGT_JTS_SecondarySchShape/HGT_JTS_SecondarySchShape.shp"
+zones = st_read(zones_file)
+```
+
+Next, we will execute some commands to explore this data:
+
+```{r}
+names(zones)
+plot(zones[1])
+summary(zones[3:10])
+```
+
+The output tells that there are a load of confusingly named columns (as is unfortunately so common with official data!). They are clearly of Harrogate, as we plotted in the last R practical. And, beyond the variable `HGTJTSSe_5`, the mean values of the `HGTJTSSe` variables seem to increase steadily. 
+
+We can get more of an indication of what is going on by plotting the numeric variables. Let's try plotting variables from 6 to 10:
+
+```{r}
+plot(zones[6:10])
+```
+
+The results have a clear spatial pattern. The high values all seem to be near the centre. They grow outward with each increase in the variable number. We can verify that the high values are yellow by plotting the high ones over the top of the overall map in a certain colour:
+
+```{r}
+plot(zones[10])
+plot(zones[zones$HGTJTSSe_8 > 6, 10], add = T, col = "black")
+```
+
+This suggests that higher is better from an accessibility perspective.
+
+## Exercises
+
+1. At the outset of the section it was stated that learning R is a good investment of time. Find and write down then names of 3 resources for learning R from the internet. Which is your favourite and why?  
+1. What is the maximum value of the variables? What do they refer to?
+
 # Joining the spatial and non-spatial data
+
+Often you will not be provided with 'attribute data' allongside your spatial data.
+Therefore it is useful to be able to 'join' non-spatial attribute data to spatial features, such as the `zones` object.
+
+You can do this based on matching variables, which we should be able to guess based on the previous analysis. Let's just verify that, by looking at the first few:
+
+```{r}
+head(school_data$LSOA_code)
+head(zones$LSOA11C)
+```
+
+The results show that the LSOA codes seem to align. 
+We can test if they are equal using the `identical()` function:
+
+```{r}
+identical(school_data$LSOA_code, zones$LSOA11C)
+summary(school_data$LSOA_code == zones$LSOA11C) # another check
+```
+
+In this case, where the values and order of the geographical and attribute data are the same, we can simply 'bind' the non-geographical variables onto the geographical data, as follows:
 
 
 
@@ -86,6 +173,7 @@ res
 100 - res
 mean(school_data$SSCart)
 mean(school_data$SSPTt)
+summary(zones)
 ```
 
 <!-- # A tibble: 1 × 4 -->
