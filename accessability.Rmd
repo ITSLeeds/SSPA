@@ -152,7 +152,12 @@ summary(school_data$LSOA_code == zones$LSOA11C) # another check
 
 In this case, where the values and order of the geographical and attribute data are the same, we can simply 'bind' the non-geographical variables onto the geographical data, as follows:
 
+```{r}
+zones_joined = st_bind_cols(zones, school_data)
+plot(zones_joined["SSCyct"])
+```
 
+The results show, as we may have imagined, that the most accessible places for cycling (with the lowest average cycle times) are located near the city centre.
 
 
 # Code that may help if you get stuck (not necessarily in order)
