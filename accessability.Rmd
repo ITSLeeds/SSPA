@@ -3,7 +3,7 @@ title: "R for Accessibility Analysis"
 author: "Robin Lovelace"
 date: "`r Sys.Date()` Week 19. For TRAN5015."
 output: 
-  bookdown::pdf_document2: 
+  bookdown::html_document2: 
     number_sections: yes
     toc: yes
 editor_options: 
@@ -20,7 +20,9 @@ Welcome to R for accessibility analysis.
 # Prerequisites 
 
 
-It assumes you have a basic understanding of R and spatial data, that can be obtained by following an online tutorial such as that provided by DataCamp, @grolemund_r_2016-1 or by following [Chapter 2](https://geocompr.robinlovelace.net/spatial-class.html) of the online book [Geocomputation with R](https://geocompr.robinlovelace.net/) [@lovelace_geocomputation_2018].
+It assumes you have a basic understanding of R and spatial data, that can be obtained by following an online tutorial such as that provided by the 'Free Introduction to R' course by [DataCamp](https://www.datacamp.com/courses/free-introduction-to-r), Chapter 2 and Chapter 3 of the online book [R for Data Science](r4ds.had.co.nz/) @grolemund_r_2016-1.
+
+In addition, to gain an understanding of geographic data in R I recommend following [Chapter 2](https://geocompr.robinlovelace.net/spatial-class.html) of the online book [Geocomputation with R](https://geocompr.robinlovelace.net/) [@lovelace_geocomputation_2018].
 
 The main tutorial is [accessability](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
 Before starting, you should check you have the following files in the 'working directory' of your R project.
@@ -408,3 +410,8 @@ summary(zones)
 - Advanced: [`vignette(package = "sf")`](https://cran.r-project.org/web/packages/sf/vignettes/)
 
 ## References
+
+```{r, eval=FALSE, echo=FALSE}
+
+```
+
