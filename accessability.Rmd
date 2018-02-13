@@ -3,7 +3,7 @@ title: "R for Accessibility Analysis"
 author: "Robin Lovelace"
 date: "`r Sys.Date()` Week 19. For TRAN5015."
 output: 
-  pdf_document: 
+  bookdown::pdf_document2: 
     number_sections: yes
     toc: yes
 editor_options: 
@@ -12,7 +12,7 @@ bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
 ```
 
 Welcome to R for accessibility analysis.
@@ -20,11 +20,9 @@ Welcome to R for accessibility analysis.
 # Prerequisites 
 
 
-It assumes you have a basic understanding of R and spatial data, that can be obtained by following an online tutorial such as that provided by DataCamp or by following [Chapter 2](https://geocompr.robinlovelace.net/spatial-class.html) of the online book [Geocomputation with R](https://geocompr.robinlovelace.net/).
-
+It assumes you have a basic understanding of R and spatial data, that can be obtained by following an online tutorial such as that provided by DataCamp, @grolemund_r_2016-1 or by following [Chapter 2](https://geocompr.robinlovelace.net/spatial-class.html) of the online book [Geocomputation with R](https://geocompr.robinlovelace.net/) [@lovelace_geocomputation_2018].
 
 The main tutorial is [accessability](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
-
 Before starting, you should check you have the following files in the 'working directory' of your R project.
 These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip).
 In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
@@ -47,6 +45,8 @@ This can be done using the function `install.packages("packagename")` as follows
 
 ```{r, eval=FALSE}
 install.packages("sf")
+install.packages("tidyverse")
+install.packages("tmap")
 ```
 
 You will load the packages using the `library()` function:
@@ -54,6 +54,12 @@ You will load the packages using the `library()` function:
 ```{r}
 library(sf)
 ```
+
+```{r, message=FALSE}
+library(tidyverse)
+library(tmap)
+```
+
 
 
 Another pre-requisite is that having the right data files.
@@ -63,9 +69,9 @@ Before starting, you should check you have the following files in the 'working d
 These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip).
 Unzip the folder and open the file `SSPA.Rproj` with RStudio.
 To check this has worked, look in the top-right panel of RStudio.
-You should see the project name as follows:
+You should see the project name in the top right of RStudio, as illustrated in Figure \@ref(fig:rstudio).
 
-```{r, fig.cap="RStudio with the SSPA project open.", echo=FALSE, out.width="90%"}
+```{r rstudio, fig.cap="RStudio with the SSPA project open. Note the files in the bottom right panel.", echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/rstudio-project-sspa.png")
 ```
 
@@ -74,13 +80,13 @@ knitr::include_graphics("figures/rstudio-project-sspa.png")
 In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
 The data we will use should go **in the same SSPA-master** folder: that will ensure the schools data is saved in your working directory.
 Unzip the file `accessibility practical data.zip` into the folder you're working from, and check it has worked.
-If your project is called SSPA, for example, you should the following in the file explorer panel:
-
-![](figures/files-rstudio.png)
+When you've loaded the project correctly, with the files unzipped in it, your RStudio session should look similar to that illustrated in Figure \@ref(fig:rstudio).
 
 **Ask for help if you cannot see these files**
 
 # Preliminary analysis of data
+
+The first thing to do is read-in a table of data:
 
 ```{r, message=FALSE}
 school_file = "accessibility practical data/HGTJTSSecondary_School.csv"
@@ -98,6 +104,12 @@ summary(school_data$SSCyct)
 ```
 
 The results tell us some very useful things about this dataset: all the records are in the same city (Harrogate again) and there is a wide variability in the time it takes to get to school by bicycle. Refer back to the data in `accessibility practical data/jts0503.xls` to see what the column names mean.
+
+```{r}
+variable_names = readxl::read_excel("accessibility practical data/jts0503.xls", skip = 9)
+variable_names
+```
+
 
 We can visualise the distribution of average times taken to get to school per zone with a histogram:
 
@@ -140,7 +152,6 @@ Use the command `View(school_data)` to see the data in an interactive spreadshee
 
 From the previous section we should have a good idea about what the data is like. From the excercises and generally playing with the data, it should be clear that there are many more things we could do to explore this dataset. R excels at statistical analysis. It allows you 'shred' datasets or 'make data sing', depending how you like to say it. So time spent learning data processing and visualisation with R is time well spent.
 
-
 Putting the data on a map is a particularly powerful method for understanding it.
 Geographical analysis can help develop locally specific sustainable transport policies. To do that, we need join the data in `school_data` with a spatial dataset we'll read-in from a shapefile.
 
@@ -153,7 +164,7 @@ zones = st_read(zones_file)
 
 Next, we will execute some commands to explore this data:
 
-```{r}
+```{r, out.width="50%", fig.cap="Illustration of basic plot with R"}
 names(zones)
 plot(zones[1])
 summary(zones[3:10])
@@ -163,18 +174,28 @@ The output tells that there are a load of confusingly named columns (as is unfor
 
 We can get more of an indication of what is going on by plotting the numeric variables. Let's try plotting variables from 6 to 10:
 
-```{r}
+```{r, out.width="50%", fig.cap="Illustration of facet plotting with the `plot` command."}
 plot(zones[6:10])
 ```
 
 The results have a clear spatial pattern. The high values all seem to be near the centre. They grow outward with each increase in the variable number. We can verify that the high values are yellow by plotting the high ones over the top of the overall map in a certain colour:
 
-```{r}
+```{r, out.width="50%", fig.cap="Overlay of zones with "}
 plot(zones[10])
 plot(zones[zones$HGTJTSSe_8 > 6, 10], add = T, col = "black")
 ```
 
-This suggests that higher is better from an accessibility perspective.
+This suggests that areas in the North of Harrogate are better from an accessibility perspective.
+
+In addition to these static maps, R can also create interactive maps of the type generated by QGIS using add-on visualisation packages such as tmap, as illustrated below:
+
+```{r, fig.cap="Interctive map of zones in RStudio.", out.width="75%"}
+library(tmap)
+tmap_mode("view") # switch to interactive plotting mode
+qtm(zones)
+```
+
+For more information on mapping with R see [Chapter 9](http://geocompr.robinlovelace.net/adv-map.html) of Geocomputation with R.
 
 ## Exercises
 
@@ -203,7 +224,7 @@ summary(school_data$LSOA_code == zones$LSOA11C) # another check
 
 In this case, where the values and order of the geographical and attribute data are the same, we can simply 'bind' the non-geographical variables onto the geographical data, as follows:
 
-```{r}
+```{r, out.width="50%"}
 zones_joined = st_bind_cols(zones, school_data)
 plot(zones_joined["SSCyct"])
 ```
@@ -221,7 +242,7 @@ school_data_mixed = school_data[new_order,]
 
 Now simply joining the data results in incorrect data, as illustrated below.
 
-```{r}
+```{r, out.width="50%"}
 zones_mixed = st_bind_cols(zones, school_data_mixed)
 plot(zones_mixed["SSCyct"])
 ```
@@ -231,7 +252,7 @@ The results show no meaningful pattern. They have been 'scrambled'.
 
 To 'descramble' the data, we can use the `inner_join()` function from the **dplyr** package. Before the data can be joined, we must ensure the 'joining variable' has the same name in both datasets:
 
-```{r}
+```{r, out.width="50%"}
 library(dplyr)
 names(school_data_mixed)[1] # recall name of LSOA variable
 names(zones)[1]
@@ -240,7 +261,7 @@ school_data_mixed = rename(school_data_mixed, LSOA11C = LSOA_code)
 
 We're going to use the `left_join()` function from **dplyr** because it does keeps the number of rows the same before and after the join:
 
-```{r}
+```{r, out.width="50%"}
 zones_descrambled = left_join(x = zones, y = school_data_mixed)
 plot(zones_descrambled["SSCyct"])
 ```
@@ -270,7 +291,7 @@ I did using code from the in-development **osmdata** package, which I've comment
 
 Now we can load-in and plot the data:
 
-```{r}
+```{r, out.width="50%"}
 schools = st_read("data/schools.geojson")
 plot(zones[15])
 plot(schools, add = T)
@@ -287,7 +308,7 @@ st_crs(schools)
 
 The output of those commands shows that they are totally different. The solution: transform the pesky schools so they have the same CRS:
 
-```{r}
+```{r, out.width="50%"}
 schools = st_transform(schools, st_crs(zones))
 plot(zones[15])
 plot(schools, add = T)
@@ -299,7 +320,7 @@ The only problem is that there are reported to be dozens of schools dotted all r
 
 One way to subset only the points that actually are schools is to remove all those that have no name:
 
-```{r}
+```{r, out.width="50%"}
 sel_noname = is.na(schools$name)
 schools = schools[!sel_noname,]
 plot(zones[15])
@@ -346,6 +367,10 @@ lines(zones_joined$dist_to_school, model_cycle$fitted.values)
 1. Take a look at the **osmdata** package on-line. What can you find out about it?
 1. How could OSM data be useful in transport research?
 
+**Advanced Challange**
+
+1. Access data from the Propensity to Cycle Tool ([pct.bike](http://www.pct.bike/)), an online system for sustainable transport planning [@lovelace_propensity_2017]. Download data for Harrogate and find travel times by bike to Harrogate city centre for each LSOA.
+
 # Code that may help if you get stuck (not necessarily in order)
 
 ```{r, eval=FALSE}
@@ -371,10 +396,15 @@ summary(zones)
 
 1. Type out each line of code and see if you can reproduce the results.
 1. Add comments with the `#` above each line to explain what is going on.
-1. **Advanced challange:** Take a look at this academic paper that is under review and critically assess its method - https://github.com/Robinlovelace/sao-paulo-travel/blob/master/paper.Rmd
+1. **Advanced challange:** Take a look at the academic paper [@moreno-monroy_public_2017] and critically assess the accessibility methods used
 
 # References and further resources
 
+## Further resources
 
+- Basic: Chapter 2 of [Geocomputation with R](https://geocompr.robinlovelace.net/spatial-class.html)
+- Intermediate: Chapter 7 of [Geocomputation with R](http://geocompr.robinlovelace.net/transport.html) on Geocomputation for Transport
+- Intermediate: all other chapters from Geocomputation with R
+- Advanced: [`vignette(package = "sf")`](https://cran.r-project.org/web/packages/sf/vignettes/)
 
-
+## References
