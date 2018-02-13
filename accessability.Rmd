@@ -8,6 +8,7 @@ output:
     toc: yes
 editor_options: 
   chunk_output_type: console
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -18,31 +19,66 @@ Welcome to R for accessibility analysis.
 
 # Prerequisites 
 
+
+It assumes you have a basic understanding of R and spatial data, that can be obtained by following an online tutorial such as that provided by DataCamp or by following [Chapter 2](https://geocompr.robinlovelace.net/spatial-class.html) of the online book [Geocomputation with R](https://geocompr.robinlovelace.net/).
+
+
+The main tutorial is [accessability](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
+
+Before starting, you should check you have the following files in the 'working directory' of your R project.
+These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip).
+In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
+
+You can check the working directory you are in with `getwd()`:
+
+```{r}
+getwd()
+```
+
+You can double check you have all the files you need by entering this command:
+
+```{r}
+list.files()
+```
+
 Building on the previous R notes, we will start by loading and visualising the data.
-Start by loading the packages we'll use for this exercise, **sf** and the slower but more mature and feature-complete **sp**. For the following commmands to work the packages must be installed on your computer.
+Start by loading the packages we'll use for this exercise, **sf**. For the following commmands to work the packages must be installed on your computer.
+This can be done using the function `install.packages("packagename")` as follows:
 
 ```{r, eval=FALSE}
-install.packages("sp")
 install.packages("sf")
 ```
 
+You will load the packages using the `library()` function:
 
 ```{r}
-library(sp)
 library(sf)
 ```
 
-If you want to use the 'development version' of **sf** (recommended for the `st_bind_cols()` function to work), you can install it with the following command (which needs **devtools** to be installed):
 
-```{r, eval=FALSE}
-# devtools::install_github("edzer/sfr")
+Another pre-requisite is that having the right data files.
+The main tutorial is [accessability](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
+
+Before starting, you should check you have the following files in the 'working directory' of your R project.
+These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip).
+Unzip the folder and open the file `SSPA.Rproj` with RStudio.
+To check this has worked, look in the top-right panel of RStudio.
+You should see the project name as follows:
+
+```{r, fig.cap="RStudio with the SSPA project open.", echo=FALSE, out.width="90%"}
+knitr::include_graphics("figures/rstudio-project-sspa.png")
 ```
 
-Another pre-requisite is that the schools data is saved in your working directory.
+**Ask for help if you cannot see this.**
+
+In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
+The data we will use should go **in the same SSPA-master** folder: that will ensure the schools data is saved in your working directory.
 Unzip the file `accessibility practical data.zip` into the folder you're working from, and check it has worked.
 If your project is called SSPA, for example, you should the following in the file explorer panel:
 
 ![](figures/files-rstudio.png)
+
+**Ask for help if you cannot see these files**
 
 # Preliminary analysis of data
 
@@ -77,6 +113,7 @@ cor(school_data$SSCart, school_data$SSCyct)
 ```
 
 Use the command `?cor` to find out what the output means: that the Pearson cooeficient of determiniation is very close to 1, meaning that there is a strong positive relationship between the time taken to get to school by car and bike.
+
 This can be plotted with the base `plot()` function:
 
 ```{r}
@@ -222,7 +259,7 @@ I did using code from the in-development **osmdata** package, which I've comment
 
 ```{r}
 # Code to download schools data - uncomment if you're brave!
-# devtools::install_github("osmdatar/osmdata")
+# install.packages("osmdatar/osmdata")
 # library(osmdata)
 # q = add_feature(opq(bbox = "Harrogate"), "amenity", "school")
 # schools_osm = osmdata_sf(q)
@@ -335,5 +372,9 @@ summary(zones)
 1. Type out each line of code and see if you can reproduce the results.
 1. Add comments with the `#` above each line to explain what is going on.
 1. **Advanced challange:** Take a look at this academic paper that is under review and critically assess its method - https://github.com/Robinlovelace/sao-paulo-travel/blob/master/paper.Rmd
+
+# References and further resources
+
+
 
 
