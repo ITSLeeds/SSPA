@@ -6,6 +6,8 @@ output:
   pdf_document: 
     number_sections: yes
     toc: yes
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +19,13 @@ Welcome to R for accessibility analysis.
 # Prerequisites 
 
 Building on the previous R notes, we will start by loading and visualising the data.
-Start by loading the packages we'll use for this exercise, **sf** and the slower but more mature and feature-complete **sp**. For the following commmands to work the packages must be installed on your computer (see notes from last for infor on how to do that).
+Start by loading the packages we'll use for this exercise, **sf** and the slower but more mature and feature-complete **sp**. For the following commmands to work the packages must be installed on your computer.
+
+```{r, eval=FALSE}
+install.packages("sp")
+install.packages("sf")
+```
+
 
 ```{r}
 library(sp)
@@ -27,7 +35,7 @@ library(sf)
 If you want to use the 'development version' of **sf** (recommended for the `st_bind_cols()` function to work), you can install it with the following command (which needs **devtools** to be installed):
 
 ```{r, eval=FALSE}
-devtools::install_github("edzer/sfr")
+# devtools::install_github("edzer/sfr")
 ```
 
 Another pre-requisite is that the schools data is saved in your working directory.

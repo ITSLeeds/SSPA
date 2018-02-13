@@ -3,9 +3,9 @@ title: "R for Spatial Planning and Analysis"
 author: "Robin Lovelace"
 date: "`r Sys.Date()` Week 17. For TRAN5015."
 output: 
-  html_document: 
-    number_sections: yes
-    toc: yes
+  github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -214,7 +214,7 @@ Then we can use square brackets, as before, but with another spatial dataset use
 
 ```{r}
 stns_harrogate = stns[harrogate_oac,]
-plot(harrogate_oac[1],)
+plot(harrogate_oac[1])
 plot(stns_harrogate[1], add = TRUE, col = "black", pch = 16, cex = 3)
 ```
 
