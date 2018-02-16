@@ -3,7 +3,7 @@ title: "R for Accessibility Analysis"
 author: "Robin Lovelace"
 date: "`r Sys.Date()` Week 19. For TRAN5015."
 output: 
-  bookdown::html_document2: 
+  bookdown::pdf_document2: 
     number_sections: yes
     toc: yes
 editor_options: 
@@ -33,8 +33,6 @@ You should see the project name in the top right of RStudio, as illustrated in F
 ```{r rstudio, fig.cap="RStudio with the SSPA project open. Note the files in the bottom right panel.", echo=FALSE, out.width="90%"}
 knitr::include_graphics("figures/rstudio-project-sspa.png")
 ```
-
-**Ask for help if you cannot see this.**
 
 In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
 The data we will use should go **in the same SSPA-master** folder: that will ensure the `schools` data is saved in your working directory.
@@ -116,7 +114,7 @@ The following command, for example, reports the correlation between the time tak
 cor(school_data$SSCart, school_data$SSCyct)
 ```
 
-Use the command `?cor` to find out what the output means: that the Pearson coeficient of determination is very close to 1, meaning that there is a strong positive relationship between the time taken to get to school by car and bike.
+Use the command `?cor` to find out what the output means: that the Pearson coefficient of determination is very close to 1, meaning that there is a strong positive relationship between the time taken to get to school by car and bike.
 
 This can be plotted with the base `plot()` function:
 
