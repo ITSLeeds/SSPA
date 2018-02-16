@@ -20,14 +20,28 @@ Welcome to R for accessibility analysis.
 # Prerequisites 
 
 
-It assumes you have a basic understanding of R and spatial data, that can be obtained by following an online tutorial such as that provided by the 'Free Introduction to R' course by [DataCamp](https://www.datacamp.com/courses/free-introduction-to-r), Chapter 2 and Chapter 3 of the online book [R for Data Science](r4ds.had.co.nz/) @grolemund_r_2016-1.
+It is assumed you have a basic understanding of R and spatial data, which can be obtained by following an online tutorial such as that provided by the 'Free Introduction to R' course by [DataCamp](https://www.datacamp.com/courses/free-introduction-to-r), Chapter 2 and Chapter 3 of the online book [R for Data Science](r4ds.had.co.nz/) @grolemund_r_2016-1.
 
-In addition, to gain an understanding of geographic data in R I recommend following [Chapter 2](https://geocompr.robinlovelace.net/spatial-class.html) of the online book [Geocomputation with R](https://geocompr.robinlovelace.net/) [@lovelace_geocomputation_2018].
+In addition, to gain an understanding of geographic data in R, I recommend following [Chapter 2](https://geocompr.robinlovelace.net/spatial-class.html) of the online book [Geocomputation with R](https://geocompr.robinlovelace.net/) [@lovelace_geocomputation_2018].
 
-The main tutorial is [accessability](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
-Before starting, you should check you have the following files in the 'working directory' of your R project.
-These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip).
+The main tutorial is [accessibility](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
+Before starting, you should check you have all the necessary files in the 'working directory' of your R project.
+These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip). Unzip the folder and open the file `SSPA.Rproj` with RStudio.
+To check this has worked, look in the top-right panel of RStudio.
+You should see the project name in the top right of RStudio, as illustrated in Figure \@ref(fig:rstudio).
+
+```{r rstudio, fig.cap="RStudio with the SSPA project open. Note the files in the bottom right panel.", echo=FALSE, out.width="90%"}
+knitr::include_graphics("figures/rstudio-project-sspa.png")
+```
+
+**Ask for help if you cannot see this.**
+
 In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
+The data we will use should go **in the same SSPA-master** folder: that will ensure the `schools` data is saved in your working directory.
+Unzip the file `accessibility practical data.zip` into the folder you're working from, and check it has worked.
+When you've loaded the project correctly, with the files unzipped in it, your RStudio session should look similar to that illustrated in Figure \@ref(fig:rstudio).
+
+**Ask for help if you cannot see these files**
 
 You can check the working directory you are in with `getwd()`:
 
@@ -42,7 +56,7 @@ list.files()
 ```
 
 Building on the previous R notes, we will start by loading and visualising the data.
-Start by loading the packages we'll use for this exercise, **sf**. For the following commmands to work the packages must be installed on your computer.
+Start by loading the packages we'll use for this exercise, **sf**. For the following commands to work the packages must be installed on your computer.
 This can be done using the function `install.packages("packagename")` as follows:
 
 ```{r, eval=FALSE}
@@ -61,30 +75,6 @@ library(sf)
 library(tidyverse)
 library(tmap)
 ```
-
-
-
-Another pre-requisite is that having the right data files.
-The main tutorial is [accessability](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
-
-Before starting, you should check you have the following files in the 'working directory' of your R project.
-These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip).
-Unzip the folder and open the file `SSPA.Rproj` with RStudio.
-To check this has worked, look in the top-right panel of RStudio.
-You should see the project name in the top right of RStudio, as illustrated in Figure \@ref(fig:rstudio).
-
-```{r rstudio, fig.cap="RStudio with the SSPA project open. Note the files in the bottom right panel.", echo=FALSE, out.width="90%"}
-knitr::include_graphics("figures/rstudio-project-sspa.png")
-```
-
-**Ask for help if you cannot see this.**
-
-In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
-The data we will use should go **in the same SSPA-master** folder: that will ensure the schools data is saved in your working directory.
-Unzip the file `accessibility practical data.zip` into the folder you're working from, and check it has worked.
-When you've loaded the project correctly, with the files unzipped in it, your RStudio session should look similar to that illustrated in Figure \@ref(fig:rstudio).
-
-**Ask for help if you cannot see these files**
 
 # Preliminary analysis of data
 
@@ -126,7 +116,7 @@ The following command, for example, reports the correlation between the time tak
 cor(school_data$SSCart, school_data$SSCyct)
 ```
 
-Use the command `?cor` to find out what the output means: that the Pearson cooeficient of determiniation is very close to 1, meaning that there is a strong positive relationship between the time taken to get to school by car and bike.
+Use the command `?cor` to find out what the output means: that the Pearson coeficient of determination is very close to 1, meaning that there is a strong positive relationship between the time taken to get to school by car and bike.
 
 This can be plotted with the base `plot()` function:
 
@@ -146,13 +136,13 @@ Use the command `View(school_data)` to see the data in an interactive spreadshee
 
 1. What does the histogram plotted above tell you about the spatial distribution of schools in Harrogate?
 1. What's the average time taken to get to school by public transport and car?
-1. What's the average percent of users in Harrogate who can get to school in 30 minutes, by public transport, car and cycling?
-1. What's the average percent of users in Harrogate who **cannot** get to school in 30 minutes, by public transport, car and cycling? (Bonus: what is surprising about this, why, and what explains it?)
+1. What's the average percentage of users in Harrogate who can get to school in 30 minutes, by public transport, car and cycling?
+1. What's the average percentage of users in Harrogate who **cannot** get to school in 30 minutes, by public transport, car and cycling? (Bonus: what is surprising about this, why, and what explains it?)
 1. How many zones are there in which the majority of children could not cycle to school in 15?
 
 # Loading and exploring the spatial data
 
-From the previous section we should have a good idea about what the data is like. From the excercises and generally playing with the data, it should be clear that there are many more things we could do to explore this dataset. R excels at statistical analysis. It allows you 'shred' datasets or 'make data sing', depending how you like to say it. So time spent learning data processing and visualisation with R is time well spent.
+From the previous section we should have a good idea about what the data is like. From the exercises and generally playing with the data, it should be clear that there are many more things we could do to explore this dataset. R excels at statistical analysis. It allows you 'shred' datasets or 'make data sing', depending how you like to say it. So time spent learning data processing and visualisation with R is time well spent.
 
 Putting the data on a map is a particularly powerful method for understanding it.
 Geographical analysis can help develop locally specific sustainable transport policies. To do that, we need join the data in `school_data` with a spatial dataset we'll read-in from a shapefile.
@@ -206,7 +196,7 @@ For more information on mapping with R see [Chapter 9](http://geocompr.robinlove
 
 # Joining the spatial and non-spatial data
 
-Often you will not be provided with 'attribute data' allongside your spatial data.
+Often you will not be provided with 'attribute data' alongside your spatial data.
 Therefore it is useful to be able to 'join' non-spatial attribute data to spatial features, such as the `zones` object.
 
 You can do this based on matching variables, which we should be able to guess based on the previous analysis. Let's just verify that, by looking at the first few:
@@ -268,11 +258,11 @@ zones_descrambled = left_join(x = zones, y = school_data_mixed)
 plot(zones_descrambled["SSCyct"])
 ```
 
-If you get the same plot as I did, well done: you've just performed an attribute join on a spatial dataset from the command line using cutting edge software for spatail data science. Congratulations!
+If you get the same plot as I did, well done: you've just performed an attribute join on a spatial dataset from the command line using cutting edge software for spatial data science. Congratulations!
 
 # Generating your own measure of accessibility
 
-It's great that the UK has accessibility data at such high geographical resolution, but in many situations, you'll have develop your own metrics of accessibility.
+It's great that the UK has accessibility data at such high geographical resolution, but in many situations, you'll have to develop your own metrics of accessibility.
 In this section we will therefore see if we can generate our own metric of accessibility, to complement the official stats.
 
 ## Downloading and processing data from OSM
@@ -282,7 +272,7 @@ I did using code from the in-development **osmdata** package, which I've comment
 
 ```{r}
 # Code to download schools data - uncomment if you're brave!
-# install.packages("osmdatar/osmdata")
+# install.packages("osmdata")
 # library(osmdata)
 # q = add_feature(opq(bbox = "Harrogate"), "amenity", "school")
 # schools_osm = osmdata_sf(q)
@@ -369,7 +359,7 @@ lines(zones_joined$dist_to_school, model_cycle$fitted.values)
 1. Take a look at the **osmdata** package on-line. What can you find out about it?
 1. How could OSM data be useful in transport research?
 
-**Advanced Challange**
+**Advanced Challenge**
 
 1. Access data from the Propensity to Cycle Tool ([pct.bike](http://www.pct.bike/)), an online system for sustainable transport planning [@lovelace_propensity_2017]. Download data for Harrogate and find travel times by bike to Harrogate city centre for each LSOA.
 
@@ -410,8 +400,4 @@ summary(zones)
 - Advanced: [`vignette(package = "sf")`](https://cran.r-project.org/web/packages/sf/vignettes/)
 
 ## References
-
-```{r, eval=FALSE, echo=FALSE}
-
-```
 
