@@ -1,7 +1,7 @@
 ---
 title: "R for Accessibility Analysis"
 author: "Robin Lovelace"
-date: "`r Sys.Date()` Week 19. For TRAN5015."
+date: "`r Sys.Date()` for SSPA TRAN5015."
 output: 
   bookdown::pdf_document2: 
     number_sections: yes
@@ -12,13 +12,10 @@ bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", warning = FALSE)
 ```
 
-Welcome to R for accessibility analysis.
-
 # Prerequisites 
-
 
 It is assumed you have a basic understanding of R and spatial data, which can be obtained by following an online tutorial such as that provided by the 'Free Introduction to R' course by [DataCamp](https://www.datacamp.com/courses/free-introduction-to-r), Chapter 2 and Chapter 3 of the online book [R for Data Science](r4ds.had.co.nz/) @grolemund_r_2016-1.
 
@@ -164,7 +161,7 @@ The output tells that there are a load of confusingly named columns (as is unfor
 
 We can get more of an indication of what is going on by plotting the numeric variables. Let's try plotting variables from 6 to 10:
 
-```{r, out.width="50%", fig.cap="Illustration of facet plotting with the `plot` command."}
+```{r, out.width="50%", fig.cap="Illustration of facet plotting with the `plot` command.", warning=FALSE}
 plot(zones[6:10])
 ```
 
@@ -197,66 +194,23 @@ For more information on mapping with R see [Chapter 9](http://geocompr.robinlove
 Often you will not be provided with 'attribute data' alongside your spatial data.
 Therefore it is useful to be able to 'join' non-spatial attribute data to spatial features, such as the `zones` object.
 
-You can do this based on matching variables, which we should be able to guess based on the previous analysis. Let's just verify that, by looking at the first few:
-
-```{r}
-head(school_data$LSOA_code)
-head(zones$LSOA11C)
-```
-
-The results show that the LSOA codes seem to align. 
-We can test if they are equal using the `identical()` function:
-
-```{r}
-identical(school_data$LSOA_code, zones$LSOA11C)
-summary(school_data$LSOA_code == zones$LSOA11C) # another check
-```
-
-In this case, where the values and order of the geographical and attribute data are the same, we can simply 'bind' the non-geographical variables onto the geographical data, as follows:
-
-```{r, out.width="50%"}
-zones_joined = st_bind_cols(zones, school_data)
-plot(zones_joined["SSCyct"])
-```
-
-The results show, as we may have imagined, that the most accessible places for cycling (with the lowest average cycle times) are located near the city centre.
-
-As an exercise, imagine that your schools data is not in the correct order.
-We can create this 'mixed up' dataset by sampling randomly from the rows:
-
-```{r}
-set.seed(42) # so random numbers repeat, for reproducibility
-new_order = sample(nrow(school_data))
-school_data_mixed = school_data[new_order,]
-```
-
-Now simply joining the data results in incorrect data, as illustrated below.
-
-```{r, out.width="50%"}
-zones_mixed = st_bind_cols(zones, school_data_mixed)
-plot(zones_mixed["SSCyct"])
-```
-
-The results show no meaningful pattern. They have been 'scrambled'.
-**This is common problem with spatial data - watch out!**
-
-To 'descramble' the data, we can use the `inner_join()` function from the **dplyr** package. Before the data can be joined, we must ensure the 'joining variable' has the same name in both datasets:
+You can do this by joining the data using the `inner_join()` function from the **dplyr** package. Before the data can be joined, we must ensure the 'joining variable' has the same name in both datasets:
 
 ```{r, out.width="50%"}
 library(dplyr)
-names(school_data_mixed)[1] # recall name of LSOA variable
+names(school_data)[1] # recall name of LSOA variable
 names(zones)[1]
-school_data_mixed = rename(school_data_mixed, LSOA11C = LSOA_code)
+school_data = rename(school_data, LSOA11C = LSOA_code)
 ```
 
 We're going to use the `left_join()` function from **dplyr** because it does keeps the number of rows the same before and after the join:
 
 ```{r, out.width="50%"}
-zones_descrambled = left_join(x = zones, y = school_data_mixed)
-plot(zones_descrambled["SSCyct"])
+zones_joined = left_join(x = zones, y = school_data)
+plot(zones_joined["SSCyct"])
 ```
 
-If you get the same plot as I did, well done: you've just performed an attribute join on a spatial dataset from the command line using cutting edge software for spatial data science. Congratulations!
+If you get the same plot as I did, well done: you've just performed an attribute join on a spatial dataset from the command line using cutting-edge software for spatial data science. Congratulations!
 
 # Generating your own measure of accessibility
 
@@ -284,7 +238,7 @@ Now we can load-in and plot the data:
 ```{r, out.width="50%"}
 schools = st_read("data/schools.geojson")
 plot(zones[15])
-plot(schools, add = T)
+plot(schools$geometry, add = TRUE)
 ```
 
 But where are the schools? What just happened??
@@ -361,7 +315,9 @@ lines(zones_joined$dist_to_school, model_cycle$fitted.values)
 
 1. Access data from the Propensity to Cycle Tool ([pct.bike](http://www.pct.bike/)), an online system for sustainable transport planning [@lovelace_propensity_2017]. Download data for Harrogate and find travel times by bike to Harrogate city centre for each LSOA.
 
-# Code that may help if you get stuck (not necessarily in order)
+## Code that may help 
+
+Run this if you get stuck:
 
 ```{r, eval=FALSE}
 
