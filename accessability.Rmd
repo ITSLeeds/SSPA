@@ -3,7 +3,7 @@ title: "R for Accessibility Analysis"
 author: "Robin Lovelace"
 date: "`r Sys.Date()` for SSPA TRAN5015."
 output: 
-  bookdown::pdf_document2: 
+  bookdown::html_document2: 
     number_sections: yes
     toc: yes
 editor_options: 
@@ -23,7 +23,7 @@ In addition, to gain an understanding of geographic data in R, I recommend follo
 
 The main tutorial is [accessibility](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
 Before starting, you should check you have all the necessary files in the 'working directory' of your R project.
-These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip). Unzip the folder and open the file `SSPA.Rproj` with RStudio.
+These can be downloaded in a single `.zip` file from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip). Unzip the folder and open the file `SSPA.Rproj` with RStudio.
 To check this has worked, look in the top-right panel of RStudio.
 You should see the project name in the top right of RStudio, as illustrated in Figure \@ref(fig:rstudio).
 
@@ -31,9 +31,7 @@ You should see the project name in the top right of RStudio, as illustrated in F
 knitr::include_graphics("figures/rstudio-project-sspa.png")
 ```
 
-In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
-The data we will use should go **in the same SSPA-master** folder: that will ensure the `schools` data is saved in your working directory.
-Unzip the file `accessibility practical data.zip` into the folder you're working from, and check it has worked.
+The data we will used is stored in the `data` folder.
 When you've loaded the project correctly, with the files unzipped in it, your RStudio session should look similar to that illustrated in Figure \@ref(fig:rstudio).
 
 **Ask for help if you cannot see these files**
@@ -76,7 +74,7 @@ library(tmap)
 The first thing to do is read-in a table of data:
 
 ```{r, message=FALSE}
-school_file = "accessibility practical data/HGTJTSSecondary_School.csv"
+school_file = "data/HGTJTSSecondary_School.csv"
 school_data = read.csv(school_file)
 ```
 
@@ -90,10 +88,10 @@ summary(school_data$LA_Name)
 summary(school_data$SSCyct)
 ```
 
-The results tell us some very useful things about this dataset: all the records are in the same city (Harrogate again) and there is a wide variability in the time it takes to get to school by bicycle. Refer back to the data in `accessibility practical data/jts0503.xls` to see what the column names mean.
+The results tell us some very useful things about this dataset: all the records are in the same city (Harrogate again) and there is a wide variability in the time it takes to get to school by bicycle. Refer back to the data in `data/jts0503.xls` to see what the column names mean.
 
 ```{r}
-variable_names = readxl::read_excel("accessibility practical data/jts0503.xls", skip = 9)
+variable_names = readxl::read_excel("data/jts0503.xls", skip = 9)
 variable_names
 ```
 
@@ -145,7 +143,7 @@ Geographical analysis can help develop locally specific sustainable transport po
 Read in the data as follows:
 
 ```{r}
-zones_file = "accessibility practical data/HGT_JTS_SecondarySchShape/HGT_JTS_SecondarySchShape.shp"
+zones_file = "data/HGT/HGT_JTS_SecondarySchShape.shp"
 zones = st_read(zones_file)
 ```
 

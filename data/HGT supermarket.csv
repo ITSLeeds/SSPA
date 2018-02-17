@@ -1,0 +1,7 @@
+here is a header line that needs to be removed before QGIS will read the file properly,,,
+x,y,postcode,name
+,,HG1 5DE,Asda
+,,,
+,,,
+,,,
+for more information about converting postcodes inside QGIS ,,,
