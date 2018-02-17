@@ -17,22 +17,6 @@ The goal of this repo is to get you up-to-speed with using R for handling spatia
 
 It assumes you have a basic understanding of R and spatial data, that can be obtained by following an online tutorial such as that provided by DataCamp or by following [Chapter 2](https://geocompr.robinlovelace.net/spatial-class.html) of the online book [Geocomputation with R](https://geocompr.robinlovelace.net/).
 
+The main tutorial is [accessability](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out from the `accessibility.pdf` file provided as a download in the project's [releases](https://github.com/ITSLeeds/SSPA/releases).
 
-The main tutorial is [accessability](https://github.com/ITSLeeds/SSPA/blob/master/accessability.Rmd), which is best followed as a print-out.
-
-Before starting, you should check you have the following files in the 'working directory' of your R project.
-These can be downloaded from from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip).
-In addition, the data in `accessibility practical data` and `QGISforSSPAdata` can be downloaded as .zip files in the 'releases' section of [github.com/ITSLeeds/SSPA](https://github.com/ITSLeeds/SSPA/releases).
-
-You can check the working directory you are in with `getwd()`:
-
-```{r}
-getwd()
-```
-
-You can double check you have all the files you need by entering this command:
-
-```{r}
-list.files()
-```
-
+Before starting you sould download the project repo (which contains the necessary data) from: [github.com/ITSLeeds/SSPA/archive/master.zip](https://github.com/ITSLeeds/SSPA/archive/master.zip).
