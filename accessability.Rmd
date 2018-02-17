@@ -3,7 +3,7 @@ title: "R for Accessibility Analysis"
 author: "Robin Lovelace"
 date: "`r Sys.Date()` for SSPA TRAN5015."
 output: 
-  bookdown::html_document2: 
+  bookdown::pdf_document2: 
     number_sections: yes
     toc: yes
 editor_options: 
