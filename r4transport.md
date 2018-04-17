@@ -1,7 +1,7 @@
 R for Spatial Planning and Analysis
 ================
 Robin Lovelace
-2018-02-06 Week 17. For TRAN5015.
+2018-03-05 Week 17. For TRAN5015.
 
 Introduction
 ============
@@ -64,9 +64,11 @@ You can also do the programmatically, but entering the following command:
 list.dirs(recursive = FALSE)
 ```
 
-    ## [1] "./.git"              "./.Rproj.user"       "./course-info"      
-    ## [4] "./data"              "./figures"           "./QGISforSSPAdata"  
-    ## [7] "./r4transport_files" "./slides"
+    ## [1] "./accessibility practical data" "./course-info"                 
+    ## [3] "./data"                         "./figures"                     
+    ## [5] "./.git"                         "./QGISforSSPAdata"             
+    ## [7] "./r4transport_files"            "./.Rproj.user"                 
+    ## [9] "./slides"
 
 What just happened?
 
@@ -84,8 +86,7 @@ This exercise demonstrates the difference between a graphical user interface and
 
 Note: this is the output you should get from the previous command:
 
-    ## [1] "Harrogate OAC"       "HGT for join"        "HGT supermarket.csv"
-    ## [4] "stations UK"         "testWKT.csv"
+    ## [1] "TRAN 5115 Module Handbook_201718.doc"
 
 Reading data
 ------------
@@ -104,17 +105,15 @@ To make the functions available from the package we've just installed, use the `
 library(sf)
 ```
 
-    ## Warning: package 'sf' was built under R version 3.4.3
-
-    ## Linking to GEOS 3.6.1, GDAL 2.2.0, proj.4 4.9.3
+    ## Linking to GEOS 3.5.1, GDAL 2.2.2, proj.4 4.9.2
 
 Now we can use the new powers enabled by this package, like reading in a shapefile:
 
 ``` r
-stns = st_read("QGISforSSPAdata/stations UK/station_point.shp")
+stns = st_read("data/stations UK/station_point.shp")
 ```
 
-    ## Reading layer `station_point' from data source `\\ds.leeds.ac.uk\staff\staff7\georl\ITSLeeds\SSPA\QGISforSSPAdata\stations UK\station_point.shp' using driver `ESRI Shapefile'
+    ## Reading layer `station_point' from data source `/home/robin/ITSLeeds/SSPA/data/stations UK/station_point.shp' using driver `ESRI Shapefile'
     ## Simple feature collection with 2525 features and 3 fields
     ## geometry type:  POINT
     ## dimension:      XY
@@ -246,15 +245,10 @@ To recall where we're at, let's re-plot the stations data, with only one variabl
 
 ``` r
 plot(stns[1])
-```
-
-![](r4transport_files/figure-markdown_github/unnamed-chunk-15-1.png)
-
-``` r
 plot(harrogate_oac[1], add = TRUE)
 ```
 
-![](r4transport_files/figure-markdown_github/unnamed-chunk-15-2.png)
+![](r4transport_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
 To subset only the stations within Harrogate involves two steps.
 
@@ -271,7 +265,7 @@ Then we can use square brackets, as before, but with another spatial dataset use
 
 ``` r
 stns_harrogate = stns[harrogate_oac,]
-plot(harrogate_oac[1],)
+plot(harrogate_oac[1])
 plot(stns_harrogate[1], add = TRUE, col = "black", pch = 16, cex = 3)
 ```
 

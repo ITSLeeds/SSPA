@@ -111,7 +111,7 @@ library(sf)
 Now we can use the new powers enabled by this package, like reading in a shapefile:
 
 ```{r}
-stns = st_read("QGISforSSPAdata/stations UK/station_point.shp")
+stns = st_read("data/stations UK/station_point.shp")
 ```
 
 Note that the information printed to screen when you read this file in is useful. It tells you the data format (ESRI Shapefile), the number of features (2,525 output areas) and the coordinate reference system (CRS): the `+units=m` part of the output tells you that units of this CRS is meters.
@@ -143,7 +143,7 @@ head(stns)
 1. Find the file Harrogate OAC layer on your computer and load it into an object called `harrogate_oac` using the function `st_read()`.
 
 ```{r, echo=FALSE, results='hide'}
-harrogate_oac = st_read("QGISforSSPAdata/Harrogate OAC/Harrogate.shp")
+harrogate_oac = st_read("data/Harrogate OAC/Harrogate.shp")
 ```
 
 2. Explore the results using the `names()`, `plot()`, and `head()` commands. How many variables does the object `harrogate_aoc` have? The results of the first of these commands is shown below. **Note: if you plot the object, make sure you only plot a few of the variables, e.g. those represented by `harrogate[1:3]`.

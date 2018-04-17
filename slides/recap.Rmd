@@ -1,0 +1,70 @@
+---
+title: "Recap on R for SSPA"
+author: "Robin Lovelace "
+date: "SSPA course`r Sys.Date()`. Code: https://github.com/ITSLeeds/SSPA"
+output:
+  ioslides_presentation:
+    transition: slower
+logo: ../figures/its-logo-square.png
+bibliography: ../references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Recap: why R?
+
+- Reproducibility requires operations to be encoded in computer code
+- That is why a command line interface (CLI) is so powerful
+- Solutions are more sustainable if they can be reproduced
+
+Requirements: students are recommended to have the latest versions of R, RStudio and QGIS installed on their computers.
+
+## Recap: accessing data in R
+
+Data can be accessed from a number of places including
+
+- OpenStreetMap via the **osmdata** package and the **overpass** website: http://overpass-turbo.eu/ - see here for parks stops in Leeds for example: http://overpass-turbo.eu/s/xWZ (global)
+
+- The Propensity to Cycle Tool [@lovelace_propensity_2017] (Lovelace et al. 2107), which allows you to download census data on desire lines and routes in the "Region data tab", e.g for West Yorkshire (national): http://www.pct.bike/m/?r=west-yorkshire
+
+- Search online and read-in data with functions such as `read.csv()` and `read_csv()` using the **tidyverse** package (worldwide)
+
+## Reading data
+
+We'll use the **sf** package to read the data.
+
+To install the package, use the following command:
+
+```{r, eval=FALSE}
+install.packages("sf")
+```
+
+See [@lovelace_geocomputation_2018] for more info
+
+
+## Reading data II
+
+To make the functions available from the package we've just installed, use the `library` function, as follows:
+
+```{r}
+library(sf)
+```
+
+Now we can use the new powers enabled by this package, like reading in a shapefile:
+
+```{r}
+stns = st_read("~/ITSLeeds/SSPA/data/stations UK/station_point.shp")
+```
+
+## Further resources
+
+- The RStudio Cheatsheet: https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+- stplanr tutorials:
+    - https://cran.r-project.org/web/packages/stplanr/vignettes/introducing-stplanr.html
+    - https://cran.r-project.org/web/packages/stplanr/vignettes/stplanr-paper.html
+- Efficient R Programming book: https://csgillespie.github.io/efficientR/
+- [Creating Maps With R](https://github.com/Robinlovelace/Creating-maps-in-R) is a good resource for basic mapping in R, using the **sp** package
+
+## References
