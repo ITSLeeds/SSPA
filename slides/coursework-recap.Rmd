@@ -2,9 +2,9 @@
 title: "Coursework workshop II (+ Big Data)"
 author: "Robin Lovelace "
 date: "SSPA course`r Sys.Date()`. Code: https://github.com/ITSLeeds/SSPA"
-output:
-  ioslides_presentation:
-    transition: slower
+# output:
+#   ioslides_presentation:
+#     transition: slower
 logo: ../figures/its-logo-square.png
 bibliography: ../references.bib
 ---
@@ -30,7 +30,7 @@ knitr::opts_chunk$set(echo = FALSE)
 Key resources:
 
 - Slides by Ian on indicators
-- Slides from me - [recap on R](http://rpubs.com/RobinLovelace/380392)
+- Slides from me - [recap on R](http://rpubs.com/RobinLovelace/380392) [@lovelace_geocomputation_2018]
 
 ## Why make indicators?
 
@@ -78,7 +78,7 @@ knitr::include_graphics("https://ars.els-cdn.com/content/image/1-s2.0-S026427511
 
 - Gantt charts are useful!
 
-```{r, fig.show='hold', out.width="80%"}
+```{r, fig.show='hold', out.width="70%"}
 knitr::include_graphics(c("https://pbs.twimg.com/media/CoXTMBlUEAAdRhk.jpg", "https://pbs.twimg.com/media/DYZ61kzWAAExNUv.jpg"))
 ```
 
@@ -86,7 +86,7 @@ Source: Dean [Attali](https://twitter.com/daattali/status/758244785534570496) an
 
 ## A bit on Big Data
 
-- But first 5 commandments of Big Data:
+- But first 5 commandments of Big Data [see @lovelace_big_2016]:
 
 > 1) thou shalt remember the purpose of thine research regardless of the size of thine dataset
 > 2) thou shalt not spend excessive amounts of time making visualising big data for the sake of it (or social media clickbait)
@@ -97,9 +97,10 @@ Source: Dean [Attali](https://twitter.com/daattali/status/758244785534570496) an
 ## Next steps: 
 
 > - Another commandment: do not get distracted by Big Data
-> - High priority: crack-on with the coursework
+> - High priority: crack-on 
+with the coursework
 > - check-out the big data and big data archives slides
 > - CRACK-ON with the coursework!
 > - I'll present on Big Data in due course...
 
-## References
+## References {.smaller}
