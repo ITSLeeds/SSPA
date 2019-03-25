@@ -119,6 +119,23 @@ See [@lovelace_propensity_2017]
 
 ![](../figures/cov-rnet-godutch.png)
 
+# Example: school access
+
+## Estimate impacts of school agglomeration
+
+Source paper on [school accessibility](https://www.sciencedirect.com/science/article/pii/S0966692316303453): @moreno-monroy_public_2017
+
+```{r, echo=FALSE}
+knitr::include_graphics("../figures/school-access.jpg")
+```
+
+## Estimate cycling potential to school
+
+Source: [paper](https://www.sciencedirect.com/science/article/pii/S2214140518301257) on PCT for schools [@goodman_scenarios_2019]
+
+![](https://ars.els-cdn.com/content/image/1-s2.0-S2214140518301257-gr4.jpg)
+
+
 # Practical Q&A
 
 ## Recap on practical and data sources
@@ -126,7 +143,31 @@ See [@lovelace_propensity_2017]
 - Practical guidebook can be found here: https://itsleeds.github.io/QGIS-intro/
 
 
+There are many good transport datasets out there, but they are not always easy to find.
 
+## Useful data sources
+
+The list below provides links to some key data sources that may be of use and interest, starting with the most universal and easy to use, and ending in rather specific datasets.
+
+- UK geoportal, providing geographic data at many levels: https://geoportal.statistics.gov.uk
+- Other national geoportals exist, such as this: http://www.geoportal.org/
+- A good source of cleaned origin destination data is the Region downloads tab in the Propensity to Cycle Tool [@lovelace_propensity_2017] - see the Region data tab for West Yorkshire here, for example: http://www.pct.bike/m/?r=west-yorkshire
+- OpenStreetMap is an excellent source of geographic data with global coverage. You can download data on specific queries (e.g. highway=cycleway) from the overpass-turbo service: https://overpass-turbo.eu/
+
+## Online lists
+
+For other datasets, search online! Good starting points in your research may be:
+
+- The open data section in Geocomputation with R: https://geocompr.robinlovelace.net/read-write.html#retrieving-data
+- Transport datasets mentioned here: https://data.world/datasets/transportation
+- UK government transport data: https://ckan.publishing.service.gov.uk/publisher/department-for-transport
+
+## Data packages
+
+- The ors and OSMTools QGIS plugins provide a range of datasets
+- The stats19 package can get road crash data for anywhere in Great Britain. See here for info: https://itsleeds.github.io/stats19/
+- The pct package provides access to data in the PCT: https://github.com/ITSLeeds/pct
+- There are many other QGIS and R packages and plugins to help access data
 
 ## References
 
