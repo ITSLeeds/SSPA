@@ -72,10 +72,15 @@ See Iacono et al. (2008)
 
 See Martinez and Vargas (2013):
 
+- Step function, $x < 10 km$
 - Exponential functions, $e^{\beta x}$ 
 - Power functions, $x^{\beta}$ 
 - Tanner functions, $x^{\beta_1}e^{\beta_2 x}$ 
 - Box-Cox functions, $exp(\beta \frac{x^{\gamma} - 1}{\gamma})$ when the parameter $\gamma \neq 0$ and $x^{\beta}$ when $\gamma = 0$ 
+
+But...
+
+- Often the functional form of distance decay is less important than other indicator design decisions - a step function will do!
 
 # Case study: Propensity to Cycle Tool
 
@@ -138,6 +143,23 @@ Source: [paper](https://www.sciencedirect.com/science/article/pii/S2214140518301
 
 # Practical Q&A
 
+## Ideas for topics
+
+- Indicator of walking 'level of service'
+  - Proximity to green space
+  - Speed limits of roads
+  - Number of paths
+  - Shops within walking distance
+  
+- Indicator of car dependence
+  - % who drive
+  - % who could cycle
+  - % who drive given nearby services
+  
+- Indicator of park accessibility
+
+
+
 ## Recap on practical and data sources
 
 - Practical guidebook can be found here: https://itsleeds.github.io/QGIS-intro/
@@ -169,9 +191,6 @@ For other datasets, search online! Good starting points in your research may be:
 - The pct package provides access to data in the PCT: https://github.com/ITSLeeds/pct
 - There are many other QGIS and R packages and plugins to help access data
 
-## References
+## References  {.smaller .build}
 
 Iacono, Michael, Kevin Krizek, and Ahmed El-Geneidy. 2008. “Access to Destinations: How Close Is Close Enough? Estimating Accurate Distance Decay Functions for Multiple Modes and Different Purposes,” 76.
-
-Martínez, L. Miguel, and José Manuel Viegas. 2013. “A New Approach to Modelling Distance-Decay Functions for Accessibility Assessment in Transport Studies.” Journal of Transport Geography 26: 87–96. doi:10.1016/j.jtrangeo.2012.08.018.
-
