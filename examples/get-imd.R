@@ -19,3 +19,6 @@ zm <- dplyr::inner_join(z, d)
 zm_lds = zm[grepl(pattern = la_name, x = zm$geo_name), ]
 plot(zm_lds[c("all", "bicycle", "car_driver", "index_of_multiple_deprivation_imd_score")])
 mapview::mapview(zm_lds, zcol = "index_of_multiple_deprivation_imd_score")
+filename = paste0("lsoa-imd-census-commute-transport-mode-data-", la_name, ".gpkg")
+sf::write_sf(zm_lds, filename)
+piggyback::pb_upload(filename)

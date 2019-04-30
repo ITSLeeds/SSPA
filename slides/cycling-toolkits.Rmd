@@ -1,8 +1,8 @@
 ---
-title: 'Open tools for sustainable transport'
-subtitle: "A case study of the 'PCT', 'CyIPT' and the 'ATT'"
-author: "Robin Lovelace, University of Leeds, on behalf of the CyIPT team"
-date: "International Conference on Transport and Health (ICTH), Mackinac Island 2018-06-24."
+title: 'Cyclability and Route Analysis'
+subtitle: "An overview with examples from the 'PCT', 'CyIPT' and 'ATT'"
+author: "Robin Lovelace"
+date: "`r Sys.Date()`"
 output:
   ioslides_presentation:
     transition: slower
@@ -11,23 +11,17 @@ logo: ../figures/its-logo-square.png
 bibliography: ../sspa.bib
 ---
 
-<!-- In adition to covering the PCT, Robin will also review the Cycling Infrastructure Prioritisation Toolkit (CyIPT). The CyIPT builds on methods developed for the PCT, but focuses on the questions "what to build where?" and "which schemes to prioritise?". In reality a piecemeal approach is insufficient to transform a city's transport infrastructure, so the CyIPT emphasise routes that join-up existing routes as part of an existing network, and demonstrates the scale of the change needed to provide cycling-friendly infrastructure city-wide. An overview of how the tool works can be found here: https://www.cyipt.bike/manual/ -->
+# Outline
 
-## Outline
+## Contents
 
-- Part I: Who, Why and What (can they do)?
+> - Recap + context
+> - The PCT
+> - The CyIPT
+> - Live demo
+> - Next steps
 
-> - Context (15 minutes)
-> - The Propensity to Cycle Tool (15 minutes on thePCT)
-> - The Cycling Infrastructure Prioritisation Tool (5 minutes on the CyIPT)
-> - Live demo (10 minutes)
-> - Interactive exercise in groups (45 minutes)
-- Part II: How (to build open tools for transport planning)? (30 minutes)
-
-> - Project team and workflow 
-> - Software
-> - Questions + next steps
-# Context
+# Recap + context
 
 ## The scale of the challenge, from this...
 
@@ -41,16 +35,35 @@ knitr::include_graphics("https://pbs.twimg.com/media/DOH94nXUIAAgcll.jpg")
 knitr::include_graphics("https://pbs.twimg.com/media/DJaWCo0U8AAzQGW.jpg:large")
 ```
 
+## Spheres of influence
+
+```{r, echo=FALSE}
+knitr::include_graphics("../figures/5ds.png")
+```
+
+
+## Problem: lack of data
+
+```{r, echo=FALSE}
+knitr::include_graphics("../figures/cervero-map.png")
+```
+
+
 ## Problem: evidence overload
 
 ```{r, echo=FALSE, out.width="80%"}
 knitr::include_graphics("https://larrycuban.files.wordpress.com/2015/02/data-overload-2.jpg")
 ```
 
+## Consequences of 'evidence overload'
+
 > - Problem is operationalising this data [@lovelace_propensity_2017]
-> - Needs to be provided in a format that can be acted on at the local level
-> - Requires a decent team
-## Who: people involved | In the PCT
+> - Needs to be provided in a format that can be acted on at the local level. Not like http://citydashboard.org/london/
+> - Requires a diverse team
+
+# The PCT
+
+## Background | Collaborative working
 
 - Robin Lovelace (Lead Developer, University of Leeds)
 - James Woodcock (Principal Investigator, Cambridge University)
@@ -61,14 +74,6 @@ knitr::include_graphics("https://larrycuban.files.wordpress.com/2015/02/data-ove
 - Nikolai Berkoff (System Architecture, Independent Developer)
 - Malcolm Morgan (GIS and infrastructure expert, UoL)
 
-## Who: people involved | In the CyIPT
-
-- Robin (Principal Investigator), Malcolm (also from 'team PCT'`)
-- Martin Lucas-Smith
-- Prof John Parkin
-And in other projects:
-- Mark Padgham (route network analysis expertise)
-- Layik Hama (software developer, deployment)
 ## Historical (personal) context
 > - These tools have been 3+ years in the making
 > - Origins go back further
@@ -78,9 +83,10 @@ Concept (PhD) -> Job at UoL (2009 - 2013)
   Link-up with Cambridge University and colleagues (2015)
     Implementation on national OD dataset, 700k routes (2016)
       Completed LSOA phase (4 million lines!) (2017)
-        PCT Wales commissioned + CyIPT Phase I (2018)
+        PCT Wales commissioned + CyIPT Phase III (2018)
 ```
-> - Internationalisation (2018?)
+> - Internationalisation (2019?)
+
 ## Academic context (source: Lovelace et al. 2017)
 ```{r, echo=FALSE, message=FALSE}
 dft = readr::read_csv("https://github.com/npct/pct-team/raw/master/data-sources/cycle-tools-wide.csv")
@@ -93,7 +99,7 @@ knitr::kable(dft[-5, ])
 Cycling and Walking Infrastructure Strategy (CWIS): to 'double cycling'
 
 ```{r, echo=FALSE, out.width="80%"}
-knitr::include_graphics("https://github.com/npct/pct-team/figures/front-page-leeds-pct-demo.png")
+knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/figures/front-page-leeds-pct-demo.png")
 ```
 
 ## The international dimension
@@ -103,25 +109,13 @@ knitr::include_graphics("https://raw.githubusercontent.com/ATFutures/who/master/
 ```
 
 > - Not a UK-specific issue, but benefits of country-specific tools
-# The Propensity to Cycle Tool (PCT)
 
 ## What can the PCT do? - see [w](http://npct0.vs.mythic-beasts.com/shiny_interface/?r=west-yorkshire)[ww.pct.bike](www.pct.bike)
 
 ```{r, echo=FALSE, fig.cap="The front page of the open source, open access Propensity to Cycle Tool (PCT).", out.width="80%"}
-knitr::include_graphics("https://github.com/npct/pct-team/figures/pct-frontpage.png")
+knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/figures/pct-frontpage.png")
 ```
 
-## Context: from concept to implementation
-
-<!-- Not a rabbit out of a hat! -->
-> - 3 years in the making
-> - Origins go back further
-> - "An algorithm to decide where to build next"!
-> - Internationalisation of methods (World Health Organisation funded project)
- 
-```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("https://github.com/npct/pct-team/blob/master/figures/pct-metalogo.png?raw=true")
-```
 ## Policy feedback
 
 "The PCT is a brilliant example of using Big Data to better plan infrastructure investment. It will allow us to have more confidence that new schemes are built in places and along travel corridors where there is high latent demand."
@@ -134,39 +128,18 @@ knitr::include_graphics("https://github.com/npct/pct-team/blob/master/figures/pc
 
 # The Cycling Infrastructure Prioritisation Toolkit (CyIPT)
 
-## Overview of the project
-
-- 12 month project funded by DfT's Innovation Challenge Fund (ICF)
-- Aim: tackle the challenge that cycling uptake is often limited by infrastructural barriers which could be remediated cost-effectively, yet investment is often spent on less cost-effective interventions, based on assessment of only a few options.
-
-- Project team:
-    - Robin Lovelace (University of Leeds)
-    - Malcolm Morgan (University of Leeds)
-    - John Parkin (University of West of England)
-    - Martin Lucas-Smith (Cyclestreets.net)
-    - Adrian Lord (Phil Jones Associates)
-
 ## Tookit design
 
 ```{r, echo=FALSE, out.width="100%"}
-knitr::include_graphics("../figures/schematic-flow-diagram.png")
+knitr::include_graphics("https://raw.githubusercontent.com/cyipt/cyipt/master/figures/schematic-flow-diagram.png")
 ```
 
-## Modelling cycling uptake
-
-- We can use 'backcasting' to estimate long-term potential under ideal questions (PCT)
-- But transport authorities need forecasts of future uptake
-- *From specific interventions* in order to do this
-- There is much existing work on this
-- But none that is 'operationalisable'
-
-> - How to operationalise available data?
 ## Data on infrastructure-uptake at a regional level
 
 - Clear link between infrastructure and uptake
 
 ```{r, echo=FALSE, out.width="70%"}
-knitr::include_graphics("../../cyipt-website/images/ttwa-uptake.png")
+knitr::include_graphics("https://raw.githubusercontent.com/cyipt/cyipt-website/master/images/ttwa-uptake.png")
 ```
 
 ## New datasets:
@@ -188,8 +161,6 @@ knitr::include_graphics(c("../../cyipt-website/images/infrastructure/large/light
 - See http://www.pct.bike/
 - And https://www.cyipt.bike
 
-# Interactive exercise in groups
-
 ## Set-up
 
 The purpose of this session is to get you more familiar with the PCT and the CyIPT in some real world scnearios. 
@@ -197,7 +168,7 @@ The purpose of this session is to get you more familiar with the PCT and the CyI
 - Divide into teams of 3-4 people and select and an area to study.  We suggest you choose a large city and surroundings (see English regions on http://www.pct.bike/ for ideas).  
 - Ensure that at least 1 person in each group has a laptop.
 
-## Assessing cycling potential with the PCT (15 Minutes)
+## Assessing cycling potential with the PCT
 
 - Using the interactive interface answer:
 - What’s the current level of cycling in the study region?
@@ -215,7 +186,7 @@ The purpose of this session is to get you more familiar with the PCT and the CyI
 - Traffic Counts - are there quiet streets along routes of high potential
 - Crash data - does it seem there are areas in particular need of remediation for safety reasons?
 
-# How to build open tools for transport planning
+# Next steps: How to use open tools for planning
 
 ## Using open source software
 
@@ -225,62 +196,17 @@ The purpose of this session is to get you more familiar with the PCT and the CyI
 
 > - QGIS mapping software
 > - sDNA QGIS plugin
-> - R (see [upcoming course](https://www.cdrc.ac.uk/events/r-transport-applications-handling-big-data-spatial-world/) April 2019)
 > - Key feature of CyIPT and PCT:
 > - Open source and provides open data downloads
-## A live demo using R
-
-```{r}
-library(stplanr)
-library(dodgr)
-roads = dodgr_streetnet("mackinac island")
-roads_graph = SpatialLinesNetwork(roads)
-centrality = igraph::edge.betweenness(roads_graph@g)
-```
-
-## Results 
-
-```{r}
-m = mapview::mapview(roads, lwd = centrality / mean(centrality))
-m@map
-```
-
-# Next steps
-
-## Active Transport Toolkit | source: [github.com/ATFutures/who](https://github.com/ATFutures/who)
-
-- World Health Organisation (WHO) funded project to explore cycling *and* walking
-
-```{r, out.width="70%"}
-knitr::include_graphics("https://raw.githubusercontent.com/ATFutures/who/master/fig/accra-flow1-interactive.png")
-```
-
-## Demo of Active Transport Toolkit in Accra
-
-<iframe src="http://35.233.61.182/"></iframe> 
-
-## Demo of PCT approach in Minnesota | Data source: [gisdata.mn.gov](https://gisdata.mn.gov/dataset/us-mn-state-metc-society-tbi-transit-onboard2016)
-
-```{r, echo=FALSE, out.width="60%"}
-knitr::include_graphics("../figures/minnesota.png")
-```
-
-> - Interactive version: http://rpubs.com/RobinLovelace/399660
-
 ## Next steps
 
-> - Phase III PCT: Schools layer, training, 'near market' scenario
-> - Phase II of CyIPT: research phase -> make publicly accessible
+> - Take a look at the data provided at www.pct.bike: can it provide useful insight into areas you're looking?
+> - In terms of policy: how can you use data to show not only what is, but what could be?
 > - Creating an active transport toolkit for cities internationally
-> - Must be a conversation
-```{r, echo=FALSE, out.width="60%", fig.show='hold'}
-# knitr::include_graphics(c("https://raw.githubusercontent.com/FasterByBike/FasterByBike/master/figures/heatmap-see.png"))
-# "https://ars.els-cdn.com/content/image/1-s2.0-S0968090X14000059-gr4.jpg"
-```
+> - Must be based on local needs
 
 ## Links + references
 
-> - Contact: project info@cyipt.bike, me: r.lovelace@leeds.ac.uk
 - The PCT in action: http://www.pct.bike/
 - A prototype of the CyIPT: http://cyipt.bike/
 - Resource on R for transport: http://geocompr.robinlovelace.net/transport.html
