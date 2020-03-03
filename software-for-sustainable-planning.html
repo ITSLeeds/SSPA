@@ -28,11 +28,11 @@ class: center, bottom, inverse
 
 # This lecture will...
 
-- Touch on features of GUI-based and CLI-based tools
+- Provide a recap on what accessibility indicators are and how to build them
 
 --
 
-- Present an overview of the transport planning and data science software landscape
+- Outline different 'tools of the trade' for transport planning, with a focus on QGIS
 
 --
 
@@ -41,6 +41,38 @@ class: center, bottom, inverse
 --
 
 - Prepare you for the practical workshop
+
+---
+
+# Context
+
+- Indicators are an important tool to support sustainable transport policies
+
+- See here for slides on building an indicator: https://rpubs.com/RobinLovelace/475813
+
+- For your coursework you will describe an indicator at
+
+- E.g. estimated proximity to green space from zones
+
+  - Can add layers: distance to green space *away from major roads*
+
+  - proximity to green space *away from major roads and with public transport connections*
+
+  - proximity to green space *away from major roads and with public transport connections and cycle infrastructure*
+  
+
+
+---
+
+# First step in indicator project...
+
+--
+
+![](https://user-images.githubusercontent.com/1825120/75754674-06f34200-5d25-11ea-84a0-283409b54fc3.gif)
+
+Get the data!
+
+
 
 ---
 
@@ -172,7 +204,7 @@ Think of a cooking recipe
 
 &lt;img src="https://www.researchgate.net/profile/Martin_Molina4/publication/304816895/figure/fig5/AS:667910355816460@1536253646575/The-User-Interface-evolution-Command-line-interfaces-began-the-UI-revolution-followed-by.jpg" width="100%" /&gt;
 
-Source: (Fernandez, Sanchez-Lopez, Sampedro, Bavle, Molina, and Campoy, 2016) 
+Source: (Fernandez, Sanchez-Lopez, Sampedro, et al., 2016) 
 
 ---
 
@@ -310,14 +342,6 @@ You can do LOTS with QGIS and it's getting more powerful every month
 
 ---
 
-## What can you use these skills for?
-
-- Example: the Propensity to Cycle Tool ([PCT.bike](http://www.pct.bike/)) (Lovelace et al. 2017)
-
-![](https://raw.githubusercontent.com/npct/pct-team/master/figures/early.png)&lt;!-- --&gt;
-
----
-
 ## OSMnx
 
 
@@ -384,6 +408,14 @@ net = opq("bangor") %&gt;%
 
 ---
 
+## How to go from GIS analysis to indicator? 
+
+- Example: the Propensity to Cycle Tool ([PCT.bike](http://www.pct.bike/)) (Lovelace et al. 2017)
+
+![](https://raw.githubusercontent.com/npct/pct-team/master/figures/early.png)&lt;!-- --&gt;
+
+---
+
 ## Advantages of QGIS
 
 --
@@ -405,6 +437,21 @@ Shallow learning curve
 --
 
 Works well with visual learning style
+
+--
+
+### What you need for the workshop
+
+- A working version of QGIS
+
+  - On your laptop (recommended if you have a decent laptop)
+  - Or on the University of Leeds computers 
+  
+- Always...
+
+--
+
+  - Save your work
 
 ---
 
@@ -433,37 +480,24 @@ See [itsleeds.github.io/QGIS-intro](https://itsleeds.github.io/QGIS-intro)
 
 # References
 
-Boeing, Geoff (2017). "OSMnx: New Methods for Acquiring, Constructing,
-Analyzing, and Visualizing Complex Street Networks". In: _Computers,
-Environment and Urban Systems_ 65, pp. 126-139. ISSN: 0198-9715. DOI:
-[10.1016/j.compenvurbsys.2017.05.004](https://doi.org/10.1016%2Fj.compenvurbsys.2017.05.004).
+Boeing, Geoff (2017). "OSMnx: New Methods for Acquiring, Constructing, Analyzing, and Visualizing Complex Street Networks". In: _Computers, Environment and Urban Systems_ 65,
+pp. 126-139. ISSN: 0198-9715. DOI: [10.1016/j.compenvurbsys.2017.05.004](https://doi.org/10.1016%2Fj.compenvurbsys.2017.05.004).
 
-Fernandez, Ramon A. Suarez, Jose Luis Sanchez-Lopez, Carlos Sampedro,
-et al. (2016). "Natural User Interfaces for Human-Drone Multi-Modal
-Interaction". In: _2016 International Conference on Unmanned Aircraft
-Systems (ICUAS)_. Arlington, VA, USA: IEEE, pp. 1013-1022. ISBN:
-978-1-4673-9334-8. DOI:
+Fernandez, Ramon A. Suarez, Jose Luis Sanchez-Lopez, Carlos Sampedro, et al. (2016). "Natural User Interfaces for Human-Drone Multi-Modal Interaction". In: _2016 International
+Conference on Unmanned Aircraft Systems (ICUAS)_. Arlington, VA, USA: IEEE, pp. 1013-1022. ISBN: 978-1-4673-9334-8. DOI:
 [10.1109/ICUAS.2016.7502665](https://doi.org/10.1109%2FICUAS.2016.7502665).
 
-Gillespie, Colin and Robin Lovelace (2016). _Efficient R Programming: A
-Practical Guide to Smarter Programming_. O'Reilly Media. ISBN:
-978-1-4919-5078-4.
+Gillespie, Colin and Robin Lovelace (2016). _Efficient R Programming: A Practical Guide to Smarter Programming_. O'Reilly Media. ISBN: 978-1-4919-5078-4.
 
-Lovelace, Robin and Richard Ellison (2017). "Stplanr: A Package for
-Transport Planning". In: _The R Journal_.
+Lovelace, Robin and Richard Ellison (2017). "Stplanr: A Package for Transport Planning". In: _The R Journal_.
 
-Lovelace, Robin, Jakub Nowosad, and Jannes Meunchow (2018).
-_Geocomputation with R_. CRC Press.
+Lovelace, Robin, Jakub Nowosad, and Jannes Meunchow (2018). _Geocomputation with R_. CRC Press.
 
-Neteler, Markus and Helena Mitasova (2008). _Open Source GIS: A GRASS
-GIS Approach_. Eng. 3. ed. OCLC: 255568974. New York, NY: Springer.
-ISBN: 978-0-387-35767-6 978-0-387-68574-8.
+Neteler, Markus and Helena Mitasova (2008). _Open Source GIS: A GRASS GIS Approach_. Eng. 3. ed. OCLC: 255568974. New York, NY: Springer. ISBN: 978-0-387-35767-6
+978-0-387-68574-8.
 
-Pebesma, Edzer, Daniel Nüst, and Roger Bivand (2012). "The R Software
-Environment in Reproducible Geoscientific Research". En. In: _Eos,
-Transactions American Geophysical Union_ 93.16, pp. 163-163. ISSN:
-2324-9250. DOI:
-[10.1029/2012EO160003](https://doi.org/10.1029%2F2012EO160003).
+Pebesma, Edzer, Daniel Nüst, and Roger Bivand (2012). "The R Software Environment in Reproducible Geoscientific Research". En. In: _Eos, Transactions American Geophysical
+Union_ 93.16, pp. 163-163. ISSN: 2324-9250. DOI: [10.1029/2012EO160003](https://doi.org/10.1029%2F2012EO160003).
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

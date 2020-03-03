@@ -18,7 +18,7 @@ background-position: 50% 50%
 class: center, bottom, inverse
 
 ```{r setup, include=FALSE}
-system("wget https://github.com/ITSLeeds/TDS/raw/master/courses/references.bib")
+# system("wget https://github.com/ITSLeeds/TDS/raw/master/courses/references.bib")
 options(htmltools.dir.version = FALSE)
 library(RefManageR)
 library(dplyr)
@@ -37,11 +37,11 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 # This lecture will...
 
-- Touch on features of GUI-based and CLI-based tools
+- Provide a recap on what accessibility indicators are and how to build them
 
 --
 
-- Present an overview of the transport planning and data science software landscape
+- Outline different 'tools of the trade' for transport planning, with a focus on QGIS
 
 --
 
@@ -50,6 +50,42 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 --
 
 - Prepare you for the practical workshop
+
+---
+
+# Context
+
+- Indicators are an important tool to support sustainable transport policies
+
+- See here for slides on building an indicator: https://rpubs.com/RobinLovelace/475813
+
+- For your coursework you will describe an indicator at
+
+- E.g. estimated proximity to green space from zones
+
+  - Can add layers: distance to green space *away from major roads*
+
+  - proximity to green space *away from major roads and with public transport connections*
+
+  - proximity to green space *away from major roads and with public transport connections and cycle infrastructure*
+  
+```{r, eval=FALSE, echo=FALSE}
+library(geofabrik)
+parks_leeds = get_geofabrik(name = "west yorkshire", layer = "multipolygons", key = "leisure", value = "park")
+sf:::plot.sfg(sf::st_geometry(parks_leeds))
+```
+
+---
+
+# First step in indicator project...
+
+--
+
+![](https://user-images.githubusercontent.com/1825120/75754674-06f34200-5d25-11ea-84a0-283409b54fc3.gif)
+
+Get the data!
+
+
 
 ---
 
@@ -242,16 +278,6 @@ knitr::kable(tms, booktabs = TRUE, caption = "Sample of transport modelling soft
 
 ---
 
-## What can you use these skills for?
-
-- Example: the Propensity to Cycle Tool ([PCT.bike](http://www.pct.bike/)) (Lovelace et al. 2017)
-
-```{r, echo=FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/figures/early.png")
-```
-
----
-
 ## OSMnx
 
 ```{r, engine='python', eval=FALSE}
@@ -316,6 +342,16 @@ net = opq("bangor") %>%
 
 ---
 
+## How to go from GIS analysis to indicator? 
+
+- Example: the Propensity to Cycle Tool ([PCT.bike](http://www.pct.bike/)) (Lovelace et al. 2017)
+
+```{r, echo=FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/figures/early.png")
+```
+
+---
+
 ## Advantages of QGIS
 
 --
@@ -337,6 +373,21 @@ Shallow learning curve
 --
 
 Works well with visual learning style
+
+--
+
+### What you need for the workshop
+
+- A working version of QGIS
+
+  - On your laptop (recommended if you have a decent laptop)
+  - Or on the University of Leeds computers 
+  
+- Always...
+
+--
+
+  - Save your work
 
 ---
 
