@@ -1,26 +1,31 @@
 ---
-title: "Coursework workshop II (+ Big Data)"
+title: "Coursework update"
 author: "Robin Lovelace "
 date: "SSPA course`r Sys.Date()`. Code: https://github.com/ITSLeeds/SSPA"
-# output:
-#   ioslides_presentation:
-#     transition: slower
+output:
+  ioslides_presentation:
+    transition: slower
 logo: ../figures/its-logo-square.png
 bibliography: ../references.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+# citr::tidy_bib_file(rmd_file = "slides/coursework-recap.Rmd", messy_bibliography = "~/uaf/allrefs.bib", file = "coursework.bib")
+# refs = c(
+#   RefManageR::ReadBib("coursework.bib"),
+#   RefManageR::ReadBib("references.bib")
+# )
+# RefManageR::WriteBib(refs, "references.bib")
 ```
 
 ## Session outline:
 
 > - Recap on progress with the coursework
-> - A quick look at Big Data for SSPA
 > - Practical working on your projects
 > - (And an opportunity to ask questions)
 
-## Recap on last week
+## Recap on previous sessions
 
 > - Many examples of indicators presented (none right or wrong)
 > - Why bother creating indicators?
@@ -29,16 +34,18 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Key resources:
 
-- Slides by Ian on indicators
-- Slides from me - [recap on R](http://rpubs.com/RobinLovelace/380392) [@lovelace_geocomputation_2018]
+- Slides + video by Ian on assessment
+- The QGIS booklet with simple example indicator: https://itsleeds.github.io/QGIS-intro/
 
 ## Why make indicators?
+
+Source: [@boisjoly_insider_2017]
 
 ```{r, out.width="100%"}
 knitr::include_graphics("../figures/el-geneidy-metrics.png")
 ```
 
-Source: [@boisjoly_insider_2017]
+
 
 ## Indicators change the world
 
@@ -64,11 +71,17 @@ knitr::include_graphics("https://ars.els-cdn.com/content/image/1-s2.0-S026427511
 
 > - How good is this indicator? [source: @mattingly_housing_2014]
 
-## An interactive catch-up on progress
+<!-- Issues: unclear colourscheme -->
+
+<!-- Unclear what motivation is -->
+
+<!-- ... -->
+
+## An interactive catch-up on progress (virtual hands up)
 
 > - Who plans to use QGIS? 
-> - Who plans to use R?
-> - Who plans to use a bit of both?
+<!-- > - Who plans to use R? -->
+<!-- > - Who plans to use a bit of both? -->
 > - Study area decisions
 > - Indicator aims decided
 > - Data access
@@ -84,7 +97,15 @@ knitr::include_graphics(c("https://pbs.twimg.com/media/CoXTMBlUEAAdRhk.jpg", "ht
 
 Source: Dean [Attali](https://twitter.com/daattali/status/758244785534570496) and Robin [Lovelace](https://twitter.com/robinlovelace/status/974602687160336386)
 
-## A bit on Big Data
+## Examples of good project reports
+
+See examples in teaching resources
+
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("https://user-images.githubusercontent.com/1825120/77342360-f92f4c00-6d27-11ea-83eb-d2adb38a717f.png")
+```
+
+## Warning on using large datasets
 
 - But first 5 commandments of Big Data [see @lovelace_big_2016]:
 
@@ -94,13 +115,13 @@ Source: Dean [Attali](https://twitter.com/daattali/status/758244785534570496) an
 > 4) thou shalt not hide thine ideas behind complex terminology associated with the terms 'big data' or 'data science', the meaning of which has not been clearly identified.
 > 5) if thou wants to be a data scientist thou must program ... "for documentation, sharing and scientific repeatability" ([mount 2016](http://www.r-bloggers.com/some-programming-language-theory-in-r/)).
 
-## Next steps: 
+<!-- ## Next steps:  -->
 
-> - Another commandment: do not get distracted by Big Data
-> - High priority: crack-on 
-with the coursework
-> - check-out the big data and big data archives slides
-> - CRACK-ON with the coursework!
-> - I'll present on Big Data in due course...
+<!-- > - Another commandment: do not get distracted by Big Data -->
+<!-- > - High priority: crack-on  -->
+<!-- with the coursework -->
+<!-- > - check-out the big data and big data archives slides -->
+<!-- > - CRACK-ON with the coursework! -->
+<!-- > - I'll present on Big Data in due course... -->
 
 ## References {.smaller}
