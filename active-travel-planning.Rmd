@@ -1,9 +1,11 @@
 ---
 title: "Active travel potential and planning"
 output:
-    github_document:
+    word_document:
+    # github_document:
       number_sections: true
-bibliography: "`r rbbt::bbt_write_bib('active-travel-planning.json', overwrite = TRUE)`"
+# bibliography: "`r # rbbt::bbt_write_bib('active-travel-planning.json', overwrite = TRUE)`"
+bibliography: "active-travel-planning.json"
 ---
 
 ```{r, include=FALSE}
