@@ -58,7 +58,7 @@ potential
 
 # 2 Sketching out indicator ideas
 
-09:50 - 10:20
+10:00 - 10:20
 
 4.  Based on the data sources from the previous tasks, what kind of
     indicator would you develop to support active travel associated with
@@ -146,8 +146,17 @@ schools, it should look something like this:
     <https://actdev.cyipt.bike/>, what additional features would be
     useful for transport planners in the tool?
 
--   Advanced: open an ‘issue’ in the project’s ‘issue tracker’ at
-    <https://github.com/cyipt/actdev/issues>
+-   Download
+    [all-sites.geojson](https://github.com/cyipt/actdev/raw/main/data-small/all-sites.geojson)
+    file representing housing developments from
+    <https://github.com/cyipt/actdev/blob/main/data-small/all-sites.geojson>
+    and add them to the map. Find the level of car use associated with
+    each development site.
+-   Advanced: pick a site (e.g. LCID) and download and add more data
+    from the tool from this link:
+    <https://github.com/cyipt/actdev/tree/main/data-small>
+-   Advanced: open an issue in the project’s issue tracker at (requires
+    a GitHub account) <https://github.com/cyipt/actdev/issues>
 
 ![](https://user-images.githubusercontent.com/1825120/110671502-79afbc80-81c6-11eb-9dc5-52046b1d04c8.gif)
 

@@ -5,10 +5,16 @@ date: "SSPA course`r Sys.Date()`. Code: https://github.com/ITSLeeds/SSPA"
 output:
   ioslides_presentation:
     transition: slower
-logo: ../figures/its-logo-square.png
+# logo: ../figures/its-logo-square.png
 # bibliography: "`r # rbbt::bbt_write_bib('active-travel-planning.json', overwrite = TRUE)`"
 bibliography: "active-travel-planning.json"
 ---
+
+```{r, echo=FALSE, eval=FALSE}
+pagedown::chrome_print("slides/active-travel-planning.Rmd")
+browseURL("slides/active-travel-planning.pdf")
+```
+
 
 ## Contents
 
